@@ -1,0 +1,64 @@
+switch-box {
+  .device-list-option {
+    height: 152px;
+    width: 152px;
+    box-shadow: 0 5px 11px rgba(0, 0, 0, 0.25);
+    max-height: 152px;
+    background: white;
+    max-width: 152px;
+    border-radius: 10px;
+    font-size: 16px;
+    color: black;
+    //text-align: center;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: left;
+    padding-left: 22px;
+    flex-direction: column;
+
+    &.on {
+      background-image: radial-gradient(
+        circle farthest-corner at 22.4% 21.7%,
+        rgba(4, 189, 228, 1) 0%,
+        rgba(2, 83, 185, 1) 100.2%
+      );
+      color: white;
+      box-shadow: 5px 10px 18px #888888;
+    }
+    img {
+      height: 30px;
+      width: 30px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background: url("../../assets/imgs/logo.png");
+    }
+
+    p {
+      margin: 5px auto;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: bold;
+      font-size: 18px;
+    }
+    .toggle {
+      padding-left: 0 !important;
+    }
+  }
+
+  .grid-container {
+    height: 70px;
+    min-width: 320px;
+    display: flex;
+    position: absolute;
+    padding-top: 21px;
+
+    ion-row {
+      justify-content: space-between;
+      margin: 0 calc(50%- 172px);
+    }
+  }
+
+  .vertical-center {
+    padding: 30px 0;
+  }
+}
