@@ -4,16 +4,16 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { ComponentsModule }  from '../components/components.module';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { DeviceListFormatterProvider } from '../providers/device-list-formatter/device-list-formatter';
-
+import {RootedIpInputModelPage} from '../pages/rooted-ip-input-model/rooted-ip-input-model'
+import { DeviceStatusCheckProvider } from '../providers/device-status-check/device-status-check';
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    ListPage
+    RootedIpInputModelPage
   ],
   imports: [
     BrowserModule,
@@ -24,13 +24,14 @@ import { DeviceListFormatterProvider } from '../providers/device-list-formatter/
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage
+    RootedIpInputModelPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    DeviceListFormatterProvider
+    DeviceListFormatterProvider,
+    DeviceStatusCheckProvider
   ]
 })
 export class AppModule {}

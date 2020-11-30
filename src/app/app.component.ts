@@ -2,9 +2,9 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
+import {RootedIpInputModelPage} from '../pages/rooted-ip-input-model/rooted-ip-input-model'
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
+import { ModalController } from 'ionic-angular';
 
 @Component({
   templateUrl: 'app.html'
@@ -16,13 +16,13 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,public modalCtrl: ModalController) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage }
+      { title: 'Add Rooted IP', component:RootedIpInputModelPage }
     ];
 
   }
@@ -37,8 +37,13 @@ export class MyApp {
   }
 
   openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
+
+
+    if(page.title==='Add Rooted IP'){
+      const modal = this.modalCtrl.create(RootedIpInputModelPage);
+      modal.present();
+    }
+    else
     this.nav.setRoot(page.component);
   }
 }

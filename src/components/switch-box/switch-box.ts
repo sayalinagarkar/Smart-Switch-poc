@@ -27,6 +27,12 @@ export class SwitchBoxComponent implements OnInit {
 
   deviceClicked(deviceName: String, index) {
     this.deviceSelected[index] = !this.deviceSelected[index];
+
+
+
   }
   updateToggleItem(deviceName: String) {}
+
+
+
 }
