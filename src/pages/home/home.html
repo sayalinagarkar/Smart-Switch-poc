@@ -20,7 +20,7 @@
   </ion-segment>
 
   <ion-slides #slider (ionSlideWillChange)="moveSlider($event)">
-    <ion-slide *ngFor="let room of deviceListConfiguration "><switch-box [deviceListConfiguration]="room"></switch-box></ion-slide>
+    <ion-slide *ngFor="let room of deviceListConfiguration;let i=index"><switch-box [rootedIP]="rootedIP" [totalDeviceStatus]="totalDeviceStatus" [roomIndex]="i" [deviceListConfiguration]="room"></switch-box></ion-slide>
 
   </ion-slides>
 

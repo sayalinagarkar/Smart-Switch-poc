@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Storage } from '@ionic/storage';
 
 /*
   Generated class for the DeviceListFormatterProvider provider.
@@ -13,6 +14,7 @@ export class DeviceListFormatterProvider {
     [
       {
         name: "Bulb",
+        index:0,
         iconUrl: "../../assets/imgs/bulb.png",
         iconUrlSwitchOn: "../../assets/imgs/bulb-on.png",
         toggleValue: "false",
@@ -20,78 +22,102 @@ export class DeviceListFormatterProvider {
       },
       {
         name: "Refrigerator",
+        index:1,
         iconUrl: "../../assets/imgs/fridge.png",
         iconUrlSwitchOn: "../../assets/imgs/fridge-on.png",
-        toggleValue: "false",
+        toggleValue: false,
         deviceID:'Relay2'
       },
       {
         name: "Fan",
+        index:2,
         iconUrl: "../../assets/imgs/fan.png",
         iconUrlSwitchOn: "../../assets/imgs/fan-on.png",
-        toggleValue: "false",
+        toggleValue: false,
         deviceID:'Relay3'
       },
       {
         name: "Air Conditioner",
+        index:3,
         iconUrl: "../../assets/imgs/ac.png",
         iconUrlSwitchOn: "../../assets/imgs/ac-on.png",
-        toggleValue: "false",
+        toggleValue: false,
         deviceID:'Relay4'
       },
     ],
     [
       {
         name: "Bulb",
+        index:4,
         iconUrl: "../../assets/imgs/bulb.png",
         iconUrlSwitchOn: "../../assets/imgs/bulb-on.png",
-        toggleValue: "false",
+        toggleValue: false,
         deviceID:'Relay5'
       },
       {
         name: "Refrigerator",
+        index:5,
         iconUrl: "../../assets/imgs/fridge.png",
         iconUrlSwitchOn: "../../assets/imgs/fridge-on.png",
-        toggleValue: "false",
-        deviceID:'Relay5'
+        toggleValue: false,
+        deviceID:'Relay6'
       },
       {
         name: "Fan",
+        index:6,
         iconUrl: "../../assets/imgs/fan.png",
         iconUrlSwitchOn: "../../assets/imgs/fan-on.png",
-        toggleValue: "false",
-        deviceID:'Relay6'
+        toggleValue: false,
+        deviceID:'Relay7'
       },
     ],
     [
       {
         name: "Bulb",
+        index:7,
         iconUrl: "../../assets/imgs/bulb.png",
         iconUrlSwitchOn: "../../assets/imgs/bulb-on.png",
-        toggleValue: "false",
-        deviceID:'Relay7'
+        toggleValue: false,
+        deviceID:'Relay8'
       },
       {
         name: "Refrigerator",
+        index:8,
         iconUrl: "../../assets/imgs/fridge.png",
         iconUrlSwitchOn: "../../assets/imgs/fridge-on.png",
-        toggleValue: "false",
-        deviceID:'Relay8'
+        toggleValue: false,
+        deviceID:'Relay9'
       },
     ],
   ];
 
   rootedIP = "";
   hardCoded = "192.168.29.236";
-  constructor() {}
+  key='rootedIP';
+  constructor(private storage: Storage) {}
 
   getDeviceListConfiguration() {
     return this.obj;
   }
+
+setDeviceListConfiguration(roomIndex,deviceIndex,deviceStatus){
+  console.log(deviceIndex);
+  this.obj[roomIndex][deviceIndex].toggleValue = !deviceStatus;
+}
   setRootedIP(rootedIP) {
+    this.storage.set(this.key, rootedIP);
     this.rootedIP = rootedIP;
   }
-  getRootedIP(): String {
-    return this.rootedIP !== "" ? this.getRootedIP.toString() : this.hardCoded;
+  getValueFromStorage()  {
+    return new Promise((resolve, reject) => { this.storage.get(this.key).then((value) => {
+      console.log('Your rootedIP is', value);
+      resolve(value);
+    }).catch((error)=>{
+      reject(error);
+    });
+  });
+
   }
+
+
 }

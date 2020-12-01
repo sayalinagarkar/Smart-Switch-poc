@@ -1,6 +1,7 @@
 import { Component, ViewChild } from "@angular/core";
-import { NavController, Slides } from "ionic-angular";
+import { AlertController, NavController, Slides } from "ionic-angular";
 import { DeviceListFormatterProvider } from "../../providers/device-list-formatter/device-list-formatter";
+import { DeviceStatusCheckProvider } from "../../providers/device-status-check/device-status-check";
 
 @Component({
   selector: "page-home",
@@ -9,17 +10,41 @@ import { DeviceListFormatterProvider } from "../../providers/device-list-formatt
 export class HomePage {
   deviceListConfiguration: any;
   pages = "0";
+  rootedIP:string;
   @ViewChild("slider") slider: Slides;
+  totalDeviceStatus=[];
 
   constructor(
     public navCtrl: NavController,
-    private deviceListFormatterProvider: DeviceListFormatterProvider
+    private deviceListFormatterProvider: DeviceListFormatterProvider,
+    private deviceStatusCheckProvider: DeviceStatusCheckProvider,
+    public alertCtrl: AlertController
   ) {
     this.initDeviceListConfiguration();
+
   }
 
   initDeviceListConfiguration(): void {
     this.deviceListConfiguration = this.deviceListFormatterProvider.getDeviceListConfiguration();
+    for(let i=0;i<this.deviceListConfiguration.length;i++){
+      for(let k=0;k<this.deviceListConfiguration[i].length;k++)
+      this.totalDeviceStatus.push(false);
+    }
+    console.log(this.totalDeviceStatus);
+    this.deviceListFormatterProvider.getValueFromStorage().then((value)=>
+     { this.rootedIP = value.toString();}
+    ).catch((error)=>{
+      this.rootedIP='';
+      const alert = this.alertCtrl.create({
+        title: 'Rooted IP not found!',
+        subTitle: 'Please register your rooted Ip again',
+        buttons: ['OK']
+      });
+      alert.present();
+}
+
+    )
+
   }
   selectedTab(index) {
     this.slider.slideTo(index);
@@ -29,5 +54,24 @@ export class HomePage {
   }
   onAddDevice(){
     console.log("device")
-    }
+  }
+  // deviceStatusChanged(deviceInfo:any){
+  //   console.log(deviceInfo);
+  //   let deviceStatus="OFF";
+  //   if(deviceInfo.deviceStatus)
+  //     deviceStatus="ON";
+  //   const url=`${this.deviceListFormatterProvider.getRootedIP()}/${deviceInfo.deviceID}?message=${deviceStatus}`
+  //   this.deviceStatusCheckProvider.checkDeviceStatus(url);
+  //   this.deviceStatusResponse(this.deviceStatusCheckProvider.checkDeviceStatus(url),deviceInfo.roomIndex,deviceInfo.deviceIndex,deviceInfo.deviceStatus);
+  // }
+
+  // deviceStatusResponse(httpStatus,roomIndex,deviceIndex,deviceStatus){
+  //   console.log(httpStatus);
+  //   if(httpStatus==='OKStatus'){
+
+  //   } else{
+  //     this.deviceListFormatterProvider.setDeviceListConfiguration(roomIndex,deviceIndex,deviceStatus);
+  //   }
+
+ // }
 }
