@@ -1,6 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Storage } from '@ionic/storage';
+import { Subject } from "rxjs/Subject";
+
 
 /*
   Generated class for the DeviceListFormatterProvider provider.
@@ -94,6 +96,8 @@ export class DeviceListFormatterProvider {
   rootedIP = "";
   hardCoded = "192.168.29.236";
   key='rootedIP';
+
+  rootedIPChange: Subject<string> = new Subject<string>();
   constructor(private storage: Storage) {}
 
   getDeviceListConfiguration() {
@@ -101,14 +105,16 @@ export class DeviceListFormatterProvider {
   }
 
 setDeviceListConfiguration(roomIndex,deviceIndex,deviceStatus){
-  console.log(deviceIndex);
-  this.obj[roomIndex][deviceIndex].toggleValue = !deviceStatus;
+    this.obj[roomIndex][deviceIndex].toggleValue = !deviceStatus;
 }
-  setRootedIP(rootedIP) {
+
+setRootedIP(rootedIP) {
+     this.rootedIPChange.next(rootedIP);
     this.storage.set(this.key, rootedIP);
     this.rootedIP = rootedIP;
-  }
-  getValueFromStorage()  {
+}
+
+getValueFromStorage()  {
     return new Promise((resolve, reject) => { this.storage.get(this.key).then((value) => {
       console.log('Your rootedIP is', value);
       resolve(value);

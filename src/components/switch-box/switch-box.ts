@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { DeviceListFormatterProvider } from "../../providers/device-list-formatter/device-list-formatter";
 import { DeviceStatusCheckProvider } from "../../providers/device-status-check/device-status-check";
-import { Observable, Subject } from "rxjs";
-import { switchMap, takeUntil, catchError } from "rxjs/operators";
+import { Subscription } from "rxjs/Subscription";
+
 /**
  * Generated class for the SwitchBoxComponent component.
  *
@@ -20,36 +20,49 @@ export class SwitchBoxComponent implements OnInit {
   @Input() rootedIP: string;
   interval: any;
   deviceListConfigurationData: any;
+  _subscription: Subscription;
   constructor(
     private deviceListFormatterProvider: DeviceListFormatterProvider,
     private deviceStatusCheckProvider: DeviceStatusCheckProvider
   ) {
     this.deviceListConfigurationData = this.deviceListFormatterProvider.getDeviceListConfiguration();
+
   }
 
   ngOnInit() {
+    this._subscription = this.deviceListFormatterProvider.rootedIPChange.subscribe(
+      (value) => {
+        this.rootedIP = value;
+        console.log(this.rootedIP);
+      }
+    );
+
     this.interval = setInterval(() => {
-      this.checkStatus();
-    }, 1000);
+     this.checkStatus();
+    }, 3000);
+
   }
 
   checkStatus() {
-    const url = `${this.rootedIP}/getStatus`;
-    const url1 = "https://jsonplaceholder.typicode.com/posts";
-
+    const url = `http://${this.rootedIP}/getStatus`;
+   // const url1="https://api.mocki.io/v1/5aca1f25";
+    console.log(url, "getStatusAPI");
     this.deviceStatusCheckProvider
       .checkDeviceStatus(url)
       .then((data) => {
+        console.log(data, "getStatus data received");
         this.updatedeviceStatus(data);
       })
-      .catch((error) => {});
+      .catch((error) => {
+        console.log("getStatus data not received");
+      });
   }
   updatedeviceStatus(deviceData) {
-    console.log("called");
+    console.log("getstatus called");
     if (deviceData !== "") {
       for (let i = 0; i < this.deviceListConfigurationData.length; i++) {
         for (let k = 0; k < this.deviceListConfigurationData[i].length; k++) {
-             this.totalDeviceStatus[this.deviceListConfigurationData[i][k].index] =
+          this.totalDeviceStatus[this.deviceListConfigurationData[i][k].index] =
             deviceData[this.deviceListConfigurationData[i][k].deviceID];
         }
       }
@@ -58,27 +71,29 @@ export class SwitchBoxComponent implements OnInit {
 
   deviceSwitchClicked(device: any, index, deviceIndex) {
     let deviceStatus = "OFF";
-    // this.deviceSelected[index] = !this.deviceSelected[index];
     this.totalDeviceStatus[index] = !this.totalDeviceStatus[index];
     if (this.totalDeviceStatus[index]) deviceStatus = "ON";
-    const url = `${this.rootedIP}/${device.deviceID}?message=${deviceStatus}`;
-    const url1 = "https://jsonplaceholder.typicode.com/posts";
-    console.log(url);
+    const url = `http://${this.rootedIP}/${device.deviceID}?message=${deviceStatus}`;
+    const url1="http://scratchpads.eu/explore/sites-list";
+    console.log(url, "deviceAPI");
     this.deviceStatusCheckProvider
-      .checkDeviceStatus(url)
+      .checkDeviceStatus(url1)
       .then((data) => {
+        console.log(data, "device statusdata received");
         this.deviceStatusResponse(
           index,
           this.totalDeviceStatus[index],
           deviceIndex
         );
       })
-      .catch((error) =>
+      .catch((error) =>{
+        console.log("no data recerived");
         this.deviceStatusResponse(
           index,
           !this.totalDeviceStatus[index],
           deviceIndex
         )
+      }
       );
   }
   updateToggleItem(deviceName: String) {}
@@ -90,11 +105,13 @@ export class SwitchBoxComponent implements OnInit {
       deviceIndex,
       deviceStatus
     );
-    console.log(this.totalDeviceStatus);
+    console.log(this.totalDeviceStatus, "totaldeviceStatus");
   }
   ngOnDestroy() {
     if (this.interval) {
       clearInterval(this.interval);
     }
+    this._subscription.unsubscribe();
+
   }
 }

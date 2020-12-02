@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, ModalController, NavController, NavParams, ToastController, ViewController } from 'ionic-angular';
-import { createTemplateMiddle } from 'typescript';
 import { DeviceListFormatterProvider } from '../../providers/device-list-formatter/device-list-formatter';
 
 /**
@@ -23,7 +22,6 @@ rootedIP:string='';
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad RootedIpInputModelPage');
   }
   addRootedIP(){
     this.deviceListFormatterProvider.setRootedIP(this.rootedIP);
@@ -35,7 +33,6 @@ rootedIP:string='';
     toast.present();
   }
   closeModel() {
-    console.log(this.rootedIP);
     this.viewCtrl.dismiss();
   }
 }

@@ -30,7 +30,6 @@ export class HomePage {
       for(let k=0;k<this.deviceListConfiguration[i].length;k++)
       this.totalDeviceStatus.push(false);
     }
-    console.log(this.totalDeviceStatus);
     this.deviceListFormatterProvider.getValueFromStorage().then((value)=>
      { this.rootedIP = value.toString();}
     ).catch((error)=>{
@@ -53,25 +52,6 @@ export class HomePage {
     this.pages = this.slider.getActiveIndex().toString();
   }
   onAddDevice(){
-    console.log("device")
   }
-  // deviceStatusChanged(deviceInfo:any){
-  //   console.log(deviceInfo);
-  //   let deviceStatus="OFF";
-  //   if(deviceInfo.deviceStatus)
-  //     deviceStatus="ON";
-  //   const url=`${this.deviceListFormatterProvider.getRootedIP()}/${deviceInfo.deviceID}?message=${deviceStatus}`
-  //   this.deviceStatusCheckProvider.checkDeviceStatus(url);
-  //   this.deviceStatusResponse(this.deviceStatusCheckProvider.checkDeviceStatus(url),deviceInfo.roomIndex,deviceInfo.deviceIndex,deviceInfo.deviceStatus);
-  // }
 
-  // deviceStatusResponse(httpStatus,roomIndex,deviceIndex,deviceStatus){
-  //   console.log(httpStatus);
-  //   if(httpStatus==='OKStatus'){
-
-  //   } else{
-  //     this.deviceListFormatterProvider.setDeviceListConfiguration(roomIndex,deviceIndex,deviceStatus);
-  //   }
-
- // }
 }
