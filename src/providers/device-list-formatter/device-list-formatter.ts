@@ -15,34 +15,61 @@ export class DeviceListFormatterProvider {
   obj = [
     [
       {
-        name: "Bulb",
-        index:0,
-        iconUrl: "../../assets/imgs/bulb.png",
-        iconUrlSwitchOn: "../../assets/imgs/bulb-on.png",
-        toggleValue: "false",
-        deviceID:'Relay1'
-      },
-      {
-        name: "Refrigerator",
-        index:1,
-        iconUrl: "../../assets/imgs/fridge.png",
-        iconUrlSwitchOn: "../../assets/imgs/fridge-on.png",
-        toggleValue: false,
-        deviceID:'Relay2'
-      },
-      {
         name: "Fan",
-        index:2,
+        index:0,
         iconUrl: "../../assets/imgs/fan.png",
         iconUrlSwitchOn: "../../assets/imgs/fan-on.png",
         toggleValue: false,
-        deviceID:'Relay3'
+        deviceID:'Relay1'
       },
       {
-        name: "Air Conditioner",
+        name: "Bulb",
+        index:1,
+        iconUrl: "../../assets/imgs/bulb.png",
+        iconUrlSwitchOn: "../../assets/imgs/bulb-on.png",
+        toggleValue: "false",
+        deviceID:'Relay2'
+      },
+      // {
+      //   name: "Refrigerator",
+      //   index:1,
+      //   iconUrl: "../../assets/imgs/fridge.png",
+      //   iconUrlSwitchOn: "../../assets/imgs/fridge-on.png",
+      //   toggleValue: false,
+      //   deviceID:'Relay2'
+      // },
+
+      // {
+      //   name: "Air Conditioner",
+      //   index:3,
+      //   iconUrl: "../../assets/imgs/ac.png",
+      //   iconUrlSwitchOn: "../../assets/imgs/ac-on.png",
+      //   toggleValue: false,
+      //   deviceID:'Relay4'
+      // },
+    ],
+    [
+      {
+        name: "Bulb",
+        index:2,
+        iconUrl: "../../assets/imgs/bulb.png",
+        iconUrlSwitchOn: "../../assets/imgs/bulb-on.png",
+        toggleValue: false,
+        deviceID:'Relay3'
+      },
+      // {
+      //   name: "Refrigerator",
+      //   index:3,
+      //   iconUrl: "../../assets/imgs/fridge.png",
+      //   iconUrlSwitchOn: "../../assets/imgs/fridge-on.png",
+      //   toggleValue: false,
+      //   deviceID:'Relay4'
+      // },
+      {
+        name: "Fan",
         index:3,
-        iconUrl: "../../assets/imgs/ac.png",
-        iconUrlSwitchOn: "../../assets/imgs/ac-on.png",
+        iconUrl: "../../assets/imgs/fan.png",
+        iconUrlSwitchOn: "../../assets/imgs/fan-on.png",
         toggleValue: false,
         deviceID:'Relay4'
       },
@@ -57,38 +84,20 @@ export class DeviceListFormatterProvider {
         deviceID:'Relay5'
       },
       {
-        name: "Refrigerator",
+        name: "Fan",
         index:5,
-        iconUrl: "../../assets/imgs/fridge.png",
-        iconUrlSwitchOn: "../../assets/imgs/fridge-on.png",
+        iconUrl: "../../assets/imgs/fan.png",
+        iconUrlSwitchOn: "../../assets/imgs/fan-on.png",
         toggleValue: false,
         deviceID:'Relay6'
       },
       {
-        name: "Fan",
-        index:6,
-        iconUrl: "../../assets/imgs/fan.png",
-        iconUrlSwitchOn: "../../assets/imgs/fan-on.png",
-        toggleValue: false,
-        deviceID:'Relay7'
-      },
-    ],
-    [
-      {
-        name: "Bulb",
-        index:7,
-        iconUrl: "../../assets/imgs/bulb.png",
-        iconUrlSwitchOn: "../../assets/imgs/bulb-on.png",
-        toggleValue: false,
-        deviceID:'Relay8'
-      },
-      {
         name: "Refrigerator",
-        index:8,
+        index:6,
         iconUrl: "../../assets/imgs/fridge.png",
         iconUrlSwitchOn: "../../assets/imgs/fridge-on.png",
         toggleValue: false,
-        deviceID:'Relay9'
+        deviceID:'Relay7'
       },
     ],
   ];

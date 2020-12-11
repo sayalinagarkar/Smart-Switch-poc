@@ -38,7 +38,7 @@ export class SwitchBoxComponent implements OnInit {
     );
 
     this.interval = setInterval(() => {
-     this.checkStatus();
+    //this.checkStatus();
     }, 3000);
 
   }
@@ -62,8 +62,10 @@ export class SwitchBoxComponent implements OnInit {
     if (deviceData !== "") {
       for (let i = 0; i < this.deviceListConfigurationData.length; i++) {
         for (let k = 0; k < this.deviceListConfigurationData[i].length; k++) {
+          if(deviceData[this.deviceListConfigurationData[i][k].deviceID]!=='undefined'){
           this.totalDeviceStatus[this.deviceListConfigurationData[i][k].index] =
             deviceData[this.deviceListConfigurationData[i][k].deviceID];
+          }
         }
       }
     }
@@ -74,10 +76,10 @@ export class SwitchBoxComponent implements OnInit {
     this.totalDeviceStatus[index] = !this.totalDeviceStatus[index];
     if (this.totalDeviceStatus[index]) deviceStatus = "ON";
     const url = `http://${this.rootedIP}/${device.deviceID}?message=${deviceStatus}`;
-    const url1="http://scratchpads.eu/explore/sites-list";
+    const url1="http://arduino.esp8266.com/stable/package_esp8266com_index.json";
     console.log(url, "deviceAPI");
     this.deviceStatusCheckProvider
-      .checkDeviceStatus(url1)
+      .checkDeviceStatus(url)
       .then((data) => {
         console.log(data, "device statusdata received");
         this.deviceStatusResponse(
@@ -87,7 +89,7 @@ export class SwitchBoxComponent implements OnInit {
         );
       })
       .catch((error) =>{
-        console.log("no data recerived");
+        console.log(error,"no data received");
         this.deviceStatusResponse(
           index,
           !this.totalDeviceStatus[index],
