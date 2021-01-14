@@ -1,0 +1,95 @@
+device-details {
+  // .flex-container{
+  //   display: flex;
+  //   background-color: whitesmoke;
+  //   box-shadow: 0 5px 11px rgba(0, 0, 0, 0.25);
+  //   height: 80px;
+  //   width: 300px;
+  //   max-height: 80px;
+  //   max-width: 300px;
+  //   margin: 25px auto;
+  //   padding: 20px;
+  //   border-radius: 15px;
+  //   flex-direction: row;
+  //   .device-icon{
+
+  //     img{
+  //       height: 30px;
+  //       width: 30px;
+  //       background-position: center;
+  //       background-repeat: no-repeat;
+  //       margin:10px 20px 0 0;
+
+  //     }
+
+  //   }
+
+  //   .device-details{
+  //     margin-left: 10px;
+  //     width: 40%;
+  //     div{
+  //       margin-top:10px !important;
+  //     }
+  //     ion-input{
+  //       border-bottom: 0.8px solid grey;
+  //     }
+  //     .text-input-md{
+  //       margin:0 !important;
+  //     }
+  //     select-dropdown{
+  //       position: relative;
+  //       height: 20px;
+  //       width: 50px;
+  //     }
+  //   }
+  // }
+  .grid-container{
+    background-color: whitesmoke;
+    box-shadow: 0 5px 11px rgba(0, 0, 0, 0.25);
+    height: 80px;
+    width: 300px;
+    max-height: 80px;
+    max-width: 300px;
+    margin: 25px auto;
+    padding: 20px;
+    border-radius: 15px;
+  }
+  .device-icon{
+padding-top: 5px;
+        img{
+          height: 30px;
+          width: 30px;
+          background-position: center;
+          background-repeat: no-repeat;
+          margin:auto;
+
+        }
+      }
+      .device-details{
+        .col{
+          padding: 0!important;
+        }
+      .type{
+        margin-top: 5px;
+      }
+      .name{
+      }
+      ion-select{
+        max-width: 100%!important;
+      }
+      .select-md{
+        padding:0!important;
+      }
+      }
+      ion-input{
+              border-bottom: 0.8px solid grey;
+            }
+            .text-input-md{
+              margin:0 !important;
+            }
+      .device-details-col{
+        margin: auto;
+      }
+
+
+}

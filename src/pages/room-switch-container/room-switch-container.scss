@@ -1,0 +1,64 @@
+page-room-switch-container {
+  .segment-md-dark .segment-button.activated,
+  .segment-md-dark .segment-button.segment-activated {
+    border-color: #3498db;
+    color: #222;
+    opacity: 1;
+    font-weight: 800;
+    font-size: 14px;
+  }
+
+  button[ion-fab] {
+    overflow: visible;
+    position: relative;
+
+    ion-label {
+      display: inline-block;
+      position: absolute;
+
+      top: -8px;
+      right: 45px;
+
+      color: white;
+      background-color: rgba(0,0,0,0.7);
+      line-height: 24px;
+      padding: 4px 8px;
+      border-radius: 4px;
+
+
+      pointer-events: auto;
+    }
+
+    contain: layout;
+  }
+  // .segment-button.segment-activated{
+  //   border: 2px dashed black !important;
+  // }
+  // .menuSegments{
+  //   margin-bottom: 5px;
+  // }
+  .bar-button-default-md,
+  .bar-button-clear-md-default,
+  .bar-button-md-default {
+    color: #555;
+  }
+
+  .toolbar-background {
+    background: radial-gradient(
+      circle farthest-corner at 22.4% 21.7%,
+      rgba(4, 189, 228, 1) 0%,
+      rgba(2, 83, 185, 1) 100.2%
+    );
+  }
+    .swiper-container {
+    height: 80%;
+  }
+  .slide-zoom{
+    height: 100%;
+    text-align:left;
+
+  }
+  .swiper-slide {
+    text-align:left;
+  }
+}

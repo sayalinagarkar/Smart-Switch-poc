@@ -1,0 +1,25 @@
+<!--
+  Generated template for the WelcomeHomePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<ion-content padding>
+  <div class="comapany-name">OnPower</div>
+  <div class="background-img"></div>
+  <div class="text-container">
+  <div class="title">
+  Welcome!
+  </div>
+  <p *ngIf="houseName" class="subtitle">to {{houseName}}'s House </p>
+
+<div class="bottom-button">
+<button ion-button full (click)="navigateToAddRoom()">Add Room</button>
+
+
+
+</div>
+  </div>
+
+</ion-content>
