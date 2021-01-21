@@ -16,6 +16,7 @@ export class HomePage {
   rootedIP:string;
   @ViewChild("slider") slider: Slides;
   totalDeviceStatus=[];
+  deviceList;
 
   constructor(
     public navCtrl: NavController,
@@ -24,6 +25,7 @@ export class HomePage {
     public alertCtrl: AlertController,
     private websocketProvider:WebsocketProvider
   ) {
+    console.log("homepage");
     this.deviceListFormatterProvider.getRootedIPValueFromStorage().then((value)=>
      { this.rootedIP = value.toString();
    if(this.rootedIP){
@@ -60,7 +62,7 @@ inItSocketConnection(){
 
       this.websocketProvider.getData().subscribe((data:any) => {
         console.log("data passed to function",data);
-  this.deviceListFormatterProvider.setNewDeviceData(data);
+ // this.deviceListFormatterProvider.setNewDeviceData(data);
   this.initDeviceListConfiguration();
 
       });
@@ -93,6 +95,7 @@ inItSocketConnection(){
 
   initDeviceListConfiguration(): void {
     let m=0;
+    this.deviceList=this.deviceListFormatterProvider.getDeviceTypeList();
     this.deviceListConfiguration = this.deviceListFormatterProvider.getDeviceListConfiguration();
     console.log(this.deviceListConfiguration[0])
     for(let i=0;i<this.deviceListConfiguration.length;i++){

@@ -3,6 +3,7 @@ import { DeviceListFormatterProvider } from "../../providers/device-list-formatt
 import { DeviceStatusCheckProvider } from "../../providers/device-status-check/device-status-check";
 import { Subscription } from "rxjs/Subscription";
 import { WebsocketProvider } from "../../providers/websocket/websocket";
+import { RoomDetailsProvider } from "../../providers/room-details/room-details";
 
 /**
  * Generated class for the SwitchBoxComponent component.
@@ -22,13 +23,16 @@ export class SwitchBoxComponent implements OnInit {
   ws: any;
   interval: any;
   currentSpeed=0;
+  switchBoardList=[]
 
   //deviceListConfigurationData: any;
   _subscription: Subscription;
   constructor(
     private deviceListFormatterProvider: DeviceListFormatterProvider,
-    private websocketProvider: WebsocketProvider
+    private websocketProvider: WebsocketProvider,
+    private roomDetailsProvider:RoomDetailsProvider
   ) {
+
     // this.deviceListConfigurationData = this.deviceListFormatterProvider.getDeviceListConfiguration();
     //   this.deviceListFormatterProvider.getValueFromStorage().then((value)=>
     //   {
@@ -44,6 +48,11 @@ export class SwitchBoxComponent implements OnInit {
     //  this.websocketProvider.connectToSocket(this.rootedIP);
     console.log(this.totalDeviceStatus);
     console.log(this.deviceListConfigurationData);
+    console.log(this.roomIndex);
+    this.switchBoardList =this.roomDetailsProvider.getSwitchBoardList(this.roomIndex);
+    console.log(this.switchBoardList,"switchBoard");
+
+
 
   }
   ngOnInit() {
@@ -111,28 +120,13 @@ export class SwitchBoxComponent implements OnInit {
     this.totalDeviceStatus[index] = switchStatus;
   }
   deviceSwitchClicked(device: any, index, deviceIndex) {
-    this.updateDeviceStatus(index, !this.totalDeviceStatus[index]);
+    this.updateDeviceStatus(device.index, !this.totalDeviceStatus[device.index]);
     let deviceStatus = false;
-    if (this.totalDeviceStatus[index]) deviceStatus = true;
-    this.sendDeviceInfoToSocket(device, deviceStatus);
+    if (this.totalDeviceStatus[device.index]) deviceStatus = true;
+    //console.log()
+    this.sendDeviceInfoToSocket(device, deviceStatus); //need to uncomment
 
-    // const url = `http://${this.rootedIP}/${device.deviceID}?message=${deviceStatus}`;
-    // const url1="http://arduino.esp8266.com/stable/package_esp8266com_index.json";
-    // console.log(url, "deviceAPI");
-
-
-
-    // this.deviceStatusCheckProvider
-    //   .checkDeviceStatus()
-    //   .subscribe((data) => {
-    //     console.log(data, "device statusdata received");
-    //     this.deviceStatusResponse(
-    //       index,
-    //       this.totalDeviceStatus[index],
-    //       deviceIndex
-    //     );
-    //   })
-  }
+     }
   decrement(){
     if(this.currentSpeed>0)
 this.currentSpeed--;
@@ -143,7 +137,7 @@ this.currentSpeed--;
   }
   sendDeviceInfoToSocket(device, deviceStatus) {
     console.log("device",device);
-    if (this.websocketProvider.checkSocketConnection){
+   // if (this.websocketProvider.checkSocketConnection){
 
       if(device.name ==='Fan'){
         this.websocketProvider.sendData({
@@ -162,13 +156,13 @@ this.currentSpeed--;
         "NodeName": device.nodeValue.toString(),
       });
 
-    }
+ //   }
   }
 
   updateToggle(toggleValue, index, device) {
     let deviceStatus = false;
-    this.updateDeviceStatus(toggleValue, index);
-    if (this.totalDeviceStatus[index]) deviceStatus = true;
+    this.updateDeviceStatus( device.index,toggleValue,);
+    if (this.totalDeviceStatus[device.index]) deviceStatus = true;
     this.sendDeviceInfoToSocket(device, deviceStatus);
   }
   //to do later

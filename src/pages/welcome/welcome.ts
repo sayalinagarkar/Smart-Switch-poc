@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { WelcomeHomePage } from '../welcome-home/welcome-home';
+import { Storage } from '@ionic/storage';
 
 /**
  * Generated class for the WelcomePage page.
@@ -15,8 +16,8 @@ import { WelcomeHomePage } from '../welcome-home/welcome-home';
 })
 export class WelcomePage {
 
-  houseName:'';
-  constructor(public navCtrl: NavController, public navParams: NavParams,public alertCtrl:AlertController) {
+  houseName='';
+  constructor(public navCtrl: NavController, public navParams: NavParams,public alertCtrl:AlertController,private storage:Storage) {
   }
 
   ionViewDidLoad() {
@@ -26,6 +27,7 @@ export class WelcomePage {
   navigateToWelcomeHome(){
 if(this.houseName!==''){
   console.log(this.houseName,"pre");
+  this.storage.set('houseName',this.houseName);
   this.navCtrl.push(WelcomeHomePage,{houseName:this.houseName});
 }else{
   const alert = this.alertCtrl.create({

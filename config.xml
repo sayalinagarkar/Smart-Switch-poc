@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.transarge" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Smart_Switch</name>
+    <name>OnPower</name>
     <description>An app for switch automation.</description>
     <author email="sayalinagarkar0@gmail.com" href="">TransErg team</author>
     <content src="index.html" />

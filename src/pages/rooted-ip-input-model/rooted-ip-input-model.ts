@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, ModalController, NavController, NavParams, ToastController, ViewController } from 'ionic-angular';
 import { DeviceListFormatterProvider } from '../../providers/device-list-formatter/device-list-formatter';
 import { HomePage } from '../home/home';
+import { RoomSwitchContainerPage } from '../room-switch-container/room-switch-container';
 
 /**
  * Generated class for the RootedIpInputModelPage page.
@@ -26,7 +27,7 @@ rootedIP:string='';
   }
   addRootedIP(){
     this.deviceListFormatterProvider.setRootedIP(this.rootedIP);
-    this.navCtrl.push(HomePage);
+    this.navCtrl.setRoot(RoomSwitchContainerPage);
     const toast = this.toastController.create({
       message: 'Your rooted IP has been added.',
       duration: 2000,

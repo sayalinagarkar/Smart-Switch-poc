@@ -23,7 +23,7 @@
   <ion-row>
     <ion-col col-2>
       <div class="device-icon">
-        <img src="../../assets/imgs/ac.png">
+        <img src="{{deviceTypeIcon}}">
           </div>
     </ion-col>
     <ion-col class="device-details-col" col-10>
@@ -32,7 +32,7 @@
      <ion-row class="name">
        <ion-col col-6>
         Device Name:</ion-col><ion-col col-6>
-          <ion-input [(ngModel)]="deviceName" type="text"></ion-input>
+          <ion-input [(ngModel)]="deviceName" (ngModelChange)="addDeviceName()" type="text"></ion-input>
 
         </ion-col></ion-row>
         <ion-row class="type"><ion-col col-6>

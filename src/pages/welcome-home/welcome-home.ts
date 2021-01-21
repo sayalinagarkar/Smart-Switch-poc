@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AddRoomPage } from '../add-room/add-room';
+import { RoomSwitchContainerPage } from '../room-switch-container/room-switch-container';
 
 /**
  * Generated class for the WelcomeHomePage page.
@@ -28,5 +29,8 @@ houseName='';
 
   navigateToAddRoom(){
 this.navCtrl.push(AddRoomPage);
+  }
+  navigateToSwitchBoardContainer(){
+    this.navCtrl.setRoot(RoomSwitchContainerPage);
   }
 }

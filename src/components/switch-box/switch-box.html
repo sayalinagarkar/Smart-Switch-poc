@@ -1,9 +1,12 @@
+
 <ion-grid class="grid-container">
+  <ng-container  class="switch" *ngFor="let switchBoard of switchBoardList;let j=index">
+    <div class="switchBoard">{{switchBoard.name.toUpperCase()}}</div>
   <ion-row>
     <ion-col
       col-6
       class="device-list-option"
-      *ngFor="let device of deviceListConfigurationData;let i=index"
+      *ngFor="let device of deviceListConfigurationData[j];let i=index"
       tappable
       [ngClass]="totalDeviceStatus[device.index]?'on':''"
     >
@@ -56,11 +59,8 @@
         </ion-col>
       </ion-row>
     </ion-col>
-    <!-- <ion-col col-6>
-
-       <ion-icon name="remove-circle" (click)="decrement()"></ion-icon>
-       {{currentNumber}}
-        <ion-icon name="add-circle" (click)="increment()"></ion-icon>
-    </ion-col> -->
   </ion-row>
+</ng-container>
+
 </ion-grid>
+

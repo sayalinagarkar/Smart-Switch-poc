@@ -1,0 +1,36 @@
+page-add-device-datails {
+  .segment-md-dark .segment-button.activated,
+  .segment-md-dark .segment-button.segment-activated {
+    border-color: #3498db;
+    color: #222;
+    opacity: 1;
+    font-weight: 800;
+    font-size: 14px;
+  }
+  .bar-button-default-md,
+  .bar-button-clear-md-default,
+  .bar-button-md-default {
+    color: #222;
+  }
+
+  .toolbar-background {
+    background: radial-gradient(
+      circle farthest-corner at 22.4% 21.7%,
+      rgba(4, 189, 228, 1) 0%,
+      rgba(2, 83, 185, 1) 100.2%
+    );
+  }
+  .error{
+    color: red;
+    padding-left: 20px;
+
+  }
+
+
+
+.item-md.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner, .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
+  border-bottom-color:#3498db;
+  box-shadow: inset 0 -1px 0 0 #3498db;
+}
+
+}

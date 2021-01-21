@@ -45,7 +45,7 @@ if(this.roomName!=='')
 
   else{
     this.roomDetailsProvider.addNewRoom(this.roomName);
-    this.navCtrl.push(RoomSwitchContainerPage,{rooms:this.rooms});
+    this.navCtrl.setRoot(RoomSwitchContainerPage,{rooms:this.rooms});
   }
 
 }

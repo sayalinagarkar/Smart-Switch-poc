@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
-import { AlertController } from 'ionic-angular';
+import { AlertController, LoadingController } from 'ionic-angular';
 import { Observable } from 'rxjs';
 import { DeviceListFormatterProvider } from '../device-list-formatter/device-list-formatter';
 
@@ -18,38 +18,41 @@ export class WebsocketProvider  {
   rootedIP:String;
   isSocketConnected:boolean=false;
   constructor(private deviceListFormatterProvider: DeviceListFormatterProvider,
-    public alertCtrl: AlertController,
+    public alertCtrl: AlertController,public loadingCtrl: LoadingController
     ) {
 
-}
- connectToWebSocket(rootedIP:String) {
-  return new Promise(function(resolve, reject) {
-    //this.ws = new WebSocket(`ws://${rootedIP}`);
-    //this.ws = new WebSocket(`ws://localhost:8082`);
-    this.ws.addEventListener("open",()=>{
-resolve("success");
-    });
-    this.ws.addEventListener("error",(error)=>{
-      reject(error);
-    })
-  });
 }
 
 //This method is used to connect to socket
   connectToSocket(rootedIP:String){
-console.log("connct")
-  this.ws = new WebSocket(`ws://${rootedIP}`);
-  //this.ws = new WebSocket(`ws://localhost:8082`);
+    this.rootedIP=rootedIP;
+    this.ws = new WebSocket(`ws://${rootedIP}`);
+  //.ws = new WebSocket(`ws://localhost:8082`);
+
+  let loading = this.loadingCtrl.create({
+    content: 'Connecting...'
+  });
+
+  loading.present();
+
+  setTimeout(() => {
+    loading.dismiss();
+  }, 5000);
+  console.log(`ws://${rootedIP}`);
+
        this.ws.addEventListener("open",()=>{
+        loading.dismiss();
+
         this.sendData({
           "MsgNmbr": "103",
           "NodeName":  "1",
         });
   });
   this.ws.addEventListener("error",()=>{
+
     const alert = this.alertCtrl.create({
       title: 'Oh,snap something went wrong',
-      subTitle: 'please try again',
+      subTitle: 'Please try again',
       buttons: [
 
         {
@@ -57,10 +60,18 @@ console.log("connct")
           handler: () => {
 
           }
+        },
+        {
+          text: 'Try again',
+          handler: () => {
+            this.connectToSocket(this.rootedIP);
+          }
         }
       ]
     });
-    alert.present();
+
+    setTimeout(()=>{    alert.present();
+    },5000);
 
 });
   }
@@ -93,7 +104,7 @@ console.log("connct")
 sendData(deviceInfo:any){
   //JSON.stringify(obj);
   console.log(JSON.stringify(deviceInfo));
-this.ws.send(JSON.stringify(deviceInfo));
+//this.ws.send(JSON.stringify(deviceInfo));
 }
 
 }

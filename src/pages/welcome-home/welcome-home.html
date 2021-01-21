@@ -9,17 +9,20 @@
   <div class="comapany-name">OnPower</div>
   <div class="background-img"></div>
   <div class="text-container">
-  <div class="title">
-  Welcome!
-  </div>
-  <p *ngIf="houseName" class="subtitle">to {{houseName}}'s House </p>
+    <div class="title">Welcome!</div>
+    <p *ngIf="houseName" class="subtitle">to {{houseName}}'s House</p>
 
-<div class="bottom-button">
+    <!-- <div class="bottom-button">
 <button ion-button full (click)="navigateToAddRoom()">Add Room</button>
 
 
 
-</div>
-  </div>
+</div> -->
+<div class="bottom-button">
+  <button ion-button full (click)="navigateToSwitchBoardContainer()">Next</button>
 
+
+
+  </div>
+  </div>
 </ion-content>

@@ -16,8 +16,10 @@ page-room-switch-container {
       display: inline-block;
       position: absolute;
 
-      top: -8px;
-      right: 45px;
+      // top: -8px;
+      // right: 45px;
+      top: -5px;
+      right: 57px;
 
       color: white;
       background-color: rgba(0,0,0,0.7);
@@ -51,7 +53,8 @@ page-room-switch-container {
     );
   }
     .swiper-container {
-    height: 80%;
+    height: 100%;
+    overflow:visible;
   }
   .slide-zoom{
     height: 100%;

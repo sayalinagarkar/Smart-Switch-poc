@@ -7,11 +7,12 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-   <!-- <device-details></device-details>
-  <device-details></device-details>
-  <device-details></device-details> -->
 
-  <ion-segment color="dark" [(ngModel)]="pages" >
+   <!-- <device-details [deviceList]="deviceList"></device-details>
+  <device-details [deviceList]="deviceList"></device-details>
+  <device-details [deviceList]="deviceList"></device-details> -->
+
+  <!-- <ion-segment color="dark" [(ngModel)]="pages" >
     <ion-segment-button value="0" (click)="selectedTab(0)">
       Living Room
     </ion-segment-button>
@@ -26,7 +27,7 @@
   <ion-slides #slider (ionSlideWillChange)="moveSlider($event)">
      <ion-slide *ngFor="let room of deviceListConfiguration;let i=index"><switch-box [rootedIP]="rootedIP" [totalDeviceStatus]="totalDeviceStatus" [roomIndex]="i" [deviceListConfigurationData]="room"></switch-box></ion-slide>
 
-  </ion-slides>
+  </ion-slides> -->
 
 <!-- <ion-fab right bottom>
   <button ion-fab mini (click)="onAddDevice()">

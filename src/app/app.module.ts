@@ -17,6 +17,7 @@ import { WelcomeHomePage } from '../pages/welcome-home/welcome-home';
 import { AddRoomPage } from '../pages/add-room/add-room';
 import { RoomSwitchContainerPage } from '../pages/room-switch-container/room-switch-container';
 import { RoomDetailsProvider } from '../providers/room-details/room-details';
+import { AddDeviceDatailsPage } from '../pages/add-device-datails/add-device-datails';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { RoomDetailsProvider } from '../providers/room-details/room-details';
     WelcomePage,
     WelcomeHomePage,
     AddRoomPage,
-    RoomSwitchContainerPage
+    RoomSwitchContainerPage,
+    AddDeviceDatailsPage
   ],
   imports: [
     BrowserModule,
@@ -45,7 +47,8 @@ import { RoomDetailsProvider } from '../providers/room-details/room-details';
     WelcomePage,
     WelcomeHomePage,
     AddRoomPage,
-    RoomSwitchContainerPage
+    RoomSwitchContainerPage,
+    AddDeviceDatailsPage
   ],
   providers: [
     StatusBar,

@@ -9,19 +9,24 @@ import { WebsocketProvider } from '../providers/websocket/websocket';
 import { WelcomePage } from '../pages/welcome/welcome';
 import { WelcomeHomePage } from '../pages/welcome-home/welcome-home';
 import { RoomSwitchContainerPage } from '../pages/room-switch-container/room-switch-container';
+import { AddDeviceDatailsPage } from '../pages/add-device-datails/add-device-datails';
+import { Storage } from '@ionic/storage';
+
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-  rootPage: any = HomePage;
+  //rootPage: any = AddDeviceDatailsPage ;
 
-  //rootPage: any = RoomSwitchContainerPage;
+  rootPage: any ;
+
 
   pages: Array<{title: string, component: any}>;
-
+  houseName='';
   constructor(public platform: Platform,     private websocketProvider:WebsocketProvider
-,    public statusBar: StatusBar, public splashScreen: SplashScreen,public modalCtrl: ModalController) {
+,    public statusBar: StatusBar, public splashScreen: SplashScreen,
+public modalCtrl: ModalController,private storage: Storage) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -36,12 +41,24 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       //this.statusBar.overlaysWebView(true);
-      //this.statusBar.backgroundColorByHexString('#3498db');
-      this.statusBar.styleLightContent();
+      this.statusBar.backgroundColorByHexString('#025cbc');
+      //this.statusBar.styleLightContent();
       this.splashScreen.hide();
-    });
-  }
+      this.storage.get('houseName').then((value)=>{
+        this.houseName=value;
+        console.log(this.houseName);
+        if(this.houseName || this.houseName==='')
+        this.rootPage=RoomSwitchContainerPage;
+        else{
+          this.rootPage=WelcomePage;
 
+        }
+
+      }).catch(()=>{
+              this.rootPage=WelcomePage;
+      });
+  });
+}
   openPage(page) {
 
     if(page.title==='Change Rooted IP'){

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { RoomDetailsProvider } from '../../providers/room-details/room-details';
 
 /**
  * Generated class for the DeviceDetailsComponent component.
@@ -13,14 +14,24 @@ import { Component } from '@angular/core';
 export class DeviceDetailsComponent {
 
   text: string;
-  deviceType='';
+  deviceType='bulb';
   deviceName='';
-  constructor() {
+  deviceTypeIcon='../../assets/imgs/bulb.png';
+  @Input() deviceList;
+  @Input() index;
+  constructor( private roomDetailsProvider:RoomDetailsProvider) {
     console.log('Hello DeviceDetailsComponent Component');
     this.text = 'Hello World';
   }
-  selectDevice(value){
-    console.log(value);
+  ngOnChanges() {
 
+  }
+   selectDevice(value){
+    console.log(value);
+    this.deviceTypeIcon=this.deviceList[value];
+    this.roomDetailsProvider.addNewDeviceType(this.index,value);
+  }
+  addDeviceName(){
+        this.roomDetailsProvider.addNewDeviceName(this.index,this.deviceName);
   }
 }
