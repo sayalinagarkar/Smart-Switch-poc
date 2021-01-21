@@ -38,7 +38,7 @@
               <ion-icon
                 [ngClass]="totalDeviceStatus[device.index]?'on':''"
                 name="add-circle"
-                (click)="increment()"
+                (click)="increment(device,totalDeviceStatus[device.index])"
               ></ion-icon>
             </p>
 
@@ -52,7 +52,7 @@
               <ion-icon
                 [ngClass]="totalDeviceStatus[device.index]?'on':''"
                 name="remove-circle"
-                (click)="decrement()"
+                (click)="decrement(device,totalDeviceStatus[device.index])"
               ></ion-icon>
             </p>
           </div>

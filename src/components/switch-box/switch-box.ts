@@ -127,13 +127,19 @@ export class SwitchBoxComponent implements OnInit {
     this.sendDeviceInfoToSocket(device, deviceStatus); //need to uncomment
 
      }
-  decrement(){
+  decrement(device,deviceStatus){
     if(this.currentSpeed>0)
 this.currentSpeed--;
+if(deviceStatus)
+this.sendDeviceInfoToSocket(device, deviceStatus);
+
+
   }
-  increment(){
+  increment(device,deviceStatus){
     if(this.currentSpeed<4)
   this.currentSpeed++;
+  if(deviceStatus)
+this.sendDeviceInfoToSocket(device, deviceStatus);
   }
   sendDeviceInfoToSocket(device, deviceStatus) {
     console.log("device",device);
@@ -165,18 +171,7 @@ this.currentSpeed--;
     if (this.totalDeviceStatus[device.index]) deviceStatus = true;
     this.sendDeviceInfoToSocket(device, deviceStatus);
   }
-  //to do later
-  updateToggleItem(deviceName: String) {}
 
-  // deviceStatusResponse(index, deviceStatus, deviceIndex) {
-  //   this.totalDeviceStatus[index] = deviceStatus;
-  //   this.deviceListFormatterProvider.setDeviceListConfiguration(
-  //     this.roomIndex,
-  //     deviceIndex,
-  //     deviceStatus
-  //   );
-  //   console.log(this.totalDeviceStatus, "totaldeviceStatus");
-  // }
 
   ngOnDestroy() {
     this._subscription.unsubscribe();
