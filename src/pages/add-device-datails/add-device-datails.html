@@ -1,0 +1,73 @@
+<!--
+  Generated template for the AddDeviceDatailsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title class="page-header">Smart Switch</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div *ngIf="(addSwitchBoardPage && switchBoardList.length!=0)|| addDevicePage">
+    <div class="deviceCountInput">
+
+      <ion-item *ngIf="addDevicePage">
+        <ion-label floating>Enter Switchboard Name</ion-label>
+        <ion-input
+          type="text"
+          [(ngModel)]="switchBoardName"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item  *ngIf="addSwitchBoardPage">
+        <ion-label *ngIf="true" floating>Select Switchborad Name</ion-label>
+        <ion-select
+        (ionChange)="selectSwitchBoard($event)"
+        [(ngModel)]="selectedSwitchBoardName"
+      >
+        <ion-option
+          *ngFor="let switchBoard of switchBoardList"
+          value="{{switchBoard.name}}"
+          >{{switchBoard.name}}</ion-option
+        >
+      </ion-select>
+
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Number of Device</ion-label>
+        <ion-input
+          type="number"
+          [(ngModel)]="deviceCount"
+          (ngModelChange)="populateDeviceCard()"
+          required
+        ></ion-input>
+      </ion-item>
+    </div>
+    <device-details
+      *ngFor="let device of totalDevice;let i=index"
+      [deviceList]="deviceList"
+      [index]="i"
+    ></device-details>
+    <div text-center>
+      <button
+        type="submit"
+        *ngIf="deviceCount > 0"
+        (click)="submitDeviceDetails()"
+        [disabled]="switchBoardName===''"
+        ion-button
+      >
+        Add device details
+      </button>
+    </div>
+  </div>
+  <p *ngIf=" addSwitchBoardPage &&  switchBoardList.length==0">
+    No switch Board added,Please add switch board
+  </p>
+</ion-content>

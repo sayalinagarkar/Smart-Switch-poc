@@ -1,0 +1,53 @@
+<!-- <div class="flex-container">
+  <div class="device-icon">
+<img src="../../assets/imgs/ac.png">
+  </div>
+  <div class="device-details">
+      Device Name:
+      <div>Device Type:</div>
+  </div>
+
+  <div class="device-details">
+<ion-input type="text"></ion-input>
+<div class="select-dropdown">
+  <ion-label>Gender</ion-label>
+ <ion-select >
+    <ion-option value="f">Female</ion-option>
+    <ion-option value="m">Male</ion-option>
+  </ion-select>
+</div>
+</div>
+</div>
+ -->
+<ion-grid class="grid-container">
+  <ion-row>
+    <ion-col col-2>
+      <div class="device-icon">
+        <img src="{{deviceTypeIcon}}">
+          </div>
+    </ion-col>
+    <ion-col class="device-details-col" col-10>
+      <div class="device-details">
+
+     <ion-row class="name">
+       <ion-col col-6>
+        Device Name:</ion-col><ion-col col-6>
+          <ion-input [(ngModel)]="deviceName" (ngModelChange)="addDeviceName()" type="text"></ion-input>
+
+        </ion-col></ion-row>
+        <ion-row class="type"><ion-col col-6>
+          Device Type:</ion-col>
+           <ion-col col-6>
+            <ion-select (ionChange)="selectDevice($event)" [(ngModel)]="deviceType">
+               <ion-option value="fan">Fan</ion-option>
+               <ion-option value="bulb">Bulb</ion-option>
+               <ion-option value="tubelight">TubeLight</ion-option>
+               <ion-option value="ac">AC</ion-option>
+
+             </ion-select>
+          </ion-col>
+          </ion-row>
+    </div>
+    </ion-col>
+  </ion-row>
+</ion-grid>

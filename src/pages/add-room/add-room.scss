@@ -1,0 +1,47 @@
+page-add-room {
+  .segment-md-dark .segment-button.activated,
+  .segment-md-dark .segment-button.segment-activated {
+    border-color: #3498db;
+    color: #222;
+    opacity: 1;
+    font-weight: 800;
+    font-size: 14px;
+  }
+  .bar-button-default-md,
+  .bar-button-clear-md-default,
+  .bar-button-md-default {
+    color: #222;
+  }
+
+  .toolbar-background {
+    background: radial-gradient(
+      circle farthest-corner at 22.4% 21.7%,
+      rgba(4, 189, 228, 1) 0%,
+      rgba(2, 83, 185, 1) 100.2%
+    );
+  }
+  .background-img{
+    background: url('../../assets/imgs/Bitmap.png');
+    background-repeat: no-repeat;
+    background-size:100% 100%;
+    height:40%;
+    margin:25px 5px 30px 5px;
+  }
+  .house-name-label{
+    margin-top: 4px;
+    font-size: 18px;
+    color:rgb(158, 154, 154);
+  }
+  .text-input{
+    margin: 10px 0!important;
+  }
+ .text-container{
+      font-size: 20px!important;
+    }
+    .button{
+      margin-top: 60px ;
+      height: 55px !important;
+      background-color:#3498db;
+      border-radius: 15px;
+    }
+}

@@ -1,0 +1,66 @@
+
+<ion-grid class="grid-container">
+  <ng-container  class="switch" *ngFor="let switchBoard of switchBoardList;let j=index">
+    <div class="switchBoard">{{switchBoard.name.toUpperCase()}}</div>
+  <ion-row>
+    <ion-col
+      col-6
+      class="device-list-option"
+      *ngFor="let device of deviceListConfigurationData[j];let i=index"
+      tappable
+      [ngClass]="totalDeviceStatus[device.index]?'on':''"
+    >
+      <ion-row>
+        <ion-col col-6>
+          <div class="vertical-center">
+            <img
+              *ngIf="!totalDeviceStatus[device.index]"
+              src="{{device.iconUrl}}"
+              alt="device-image"
+            />
+            <img
+              *ngIf="totalDeviceStatus[device.index]"
+              src="{{device.iconUrlSwitchOn}}"
+              alt="device-image"
+            />
+
+            <p class="device-name">{{ device.name}}</p>
+            <ion-toggle
+              class="toggle"
+              [(ngModel)]="totalDeviceStatus[device.index]"
+              (ngModelChange)="updateToggle($event,i,device)"
+            ></ion-toggle>
+          </div>
+        </ion-col>
+        <ion-col col-6 *ngIf="device.name ==='Fan'" class="fan-speed">
+          <div class="vertical-center">
+            <p>
+              <ion-icon
+                [ngClass]="totalDeviceStatus[device.index]?'on':''"
+                name="add-circle"
+                (click)="increment()"
+              ></ion-icon>
+            </p>
+
+            <p
+              class="counter"
+              [ngClass]="totalDeviceStatus[device.index]?'on':''"
+            >
+              {{currentSpeed}}
+            </p>
+            <p>
+              <ion-icon
+                [ngClass]="totalDeviceStatus[device.index]?'on':''"
+                name="remove-circle"
+                (click)="decrement()"
+              ></ion-icon>
+            </p>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+</ng-container>
+
+</ion-grid>
+

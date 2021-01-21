@@ -1,0 +1,51 @@
+page-welcome-home {
+  .comapany-name {
+position: relative;
+top:20px;
+left:10px;
+font-size: 27px;
+color:#3498db;
+  }
+    .background-img{
+      background: url('../../assets/imgs/welcome-home.png');
+      background-repeat: no-repeat;
+      background-size:cover;
+      width: 100%;
+      height:45%;
+      margin:25px 5px 10px 20px;
+    }
+    .text-container{
+      margin:20px 10px 10px 10px !important;
+      margin: 5px auto;
+      font-family: Arial, Helvetica, sans-serif;
+
+      .title{
+        font-weight: bold;
+        font-size: 50px;
+      }
+      .subtitle{
+        margin-top: 4px;
+        font-size: 24px;
+        color:rgb(56, 49, 49);
+      }
+      .house-name-label{
+        margin-top: 4px;
+        font-size: 18px;
+        color:rgb(158, 154, 154);
+      }
+      .housename{
+        font-size: 18px;
+      }
+      .bottom-button {
+        position: relative;
+
+      .button{
+        margin-top: 30px ;
+        height: 55px !important;
+        background-color:#3498db;
+        border-radius: 15px;
+      }
+    }
+
+}
+}
