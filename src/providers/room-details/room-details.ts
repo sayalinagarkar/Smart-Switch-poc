@@ -46,8 +46,8 @@ export class RoomDetailsProvider {
           name: "Fan",
           index: 2,
           nodeValue: 1,
-          iconUrl: "../../assets/imgs/bulb.png",
-          iconUrlSwitchOn: "../../assets/imgs/bulb-on.png",
+          iconUrl: "../../assets/imgs/fan.png",
+          iconUrlSwitchOn: "../../assets/imgs/fan-on.png",
           toggleValue: false,
           deviceID: "Fan1",
           Speed: 0,
@@ -431,10 +431,10 @@ for(let i=0;i<this.switchBoardList.length;i++){
  let switchBoardIndexInRoom=this.findswitchBoardIndexInRoom(currentRoom);
  console.log(data["NodeName"]);
      switch(msgNumber){
-       case 201:;
+       case 201:
        for(let i=0;i<this.createRoomData[currentRoom][switchBoardIndexInRoom].length;i++){
         if(this.createRoomData[currentRoom][switchBoardIndexInRoom][i].deviceID===data['Pin']){
-          this.createRoomData[currentRoom][switchBoardIndexInRoom][i].toggleValue=data['State'];
+          this.createRoomData[currentRoom][switchBoardIndexInRoom][i].toggleValue=data['Status'];
 
         // console.log(data[currentRoom[i].deviceID]);
         }
@@ -445,7 +445,7 @@ for(let i=0;i<this.switchBoardList.length;i++){
            if(this.createRoomData[currentRoom][switchBoardIndexInRoom][i].deviceID===data['Pin'])
            {
              console.log("in 202");
-             this.createRoomData[currentRoom][switchBoardIndexInRoom][i].toggleValue=data['State'];
+             this.createRoomData[currentRoom][switchBoardIndexInRoom][i].toggleValue=data['Status'];
              this.createRoomData[currentRoom][switchBoardIndexInRoom][i].Speed=Number(data['FanSpeed']);
            this.fanSpeedChange.next(Number(data['FanSpeed']));
            }
@@ -456,6 +456,7 @@ for(let i=0;i<this.switchBoardList.length;i++){
           this.createRoomData[currentRoom][switchBoardIndexInRoom][i].toggleValue = data[this.createRoomData[currentRoom][switchBoardIndexInRoom][i].deviceID];
            if(this.createRoomData[currentRoom][switchBoardIndexInRoom][i].deviceID==='Fan1'){
             this.createRoomData[currentRoom][switchBoardIndexInRoom][i].Speed=Number(data['FanSpeed']);
+            console.log(Number(data['FanSpeed']));
            this.fanSpeedChange.next(Number(data['FanSpeed']));
 
            }

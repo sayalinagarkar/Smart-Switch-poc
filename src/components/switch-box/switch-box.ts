@@ -76,9 +76,10 @@ export class SwitchBoxComponent implements OnInit {
         this.rootedIP = value;
       }
     );
-    this._subscription = this.deviceListFormatterProvider.fanSpeedChange.subscribe(
+    this._subscription = this.roomDetailsProvider.fanSpeedChange.subscribe(
       (value) => {
         this.currentSpeed = value;
+        console.log(value,"fanSpeed");
       }
     );
     // this._subscription = this.deviceListFormatterProvider.objChange.subscribe(
@@ -149,7 +150,7 @@ this.sendDeviceInfoToSocket(device, deviceStatus);
         this.websocketProvider.sendData({
           "MsgNmbr": "102",
           "Pin": device.deviceID,
-          "State": deviceStatus,
+          "Status": deviceStatus,
           "Speed":this.currentSpeed,
           "NodeName": device.nodeValue.toString(),
         });
@@ -158,7 +159,7 @@ this.sendDeviceInfoToSocket(device, deviceStatus);
       this.websocketProvider.sendData({
         "MsgNmbr": "101",
         "Pin": device.deviceID,
-        "State": deviceStatus,
+        "Status": deviceStatus,
         "NodeName": device.nodeValue.toString(),
       });
 

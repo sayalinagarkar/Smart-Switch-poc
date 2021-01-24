@@ -27,7 +27,7 @@ export class WebsocketProvider  {
   connectToSocket(rootedIP:String){
     this.rootedIP=rootedIP;
     this.ws = new WebSocket(`ws://${rootedIP}`);
-  //.ws = new WebSocket(`ws://localhost:8082`);
+    //this.ws = new WebSocket(`ws://localhost:8082`);
 
   let loading = this.loadingCtrl.create({
     content: 'Connecting...'
@@ -37,11 +37,12 @@ export class WebsocketProvider  {
 
   setTimeout(() => {
     loading.dismiss();
-  }, 5000);
+  }, 4000);
   console.log(`ws://${rootedIP}`);
 
        this.ws.addEventListener("open",()=>{
-        loading.dismiss();
+         console.log("connected");
+       loading.dismiss();
 
         this.sendData({
           "MsgNmbr": "103",
@@ -71,7 +72,7 @@ export class WebsocketProvider  {
     });
 
     setTimeout(()=>{    alert.present();
-    },5000);
+    },4000);
 
 });
   }
@@ -104,7 +105,7 @@ export class WebsocketProvider  {
 sendData(deviceInfo:any){
   //JSON.stringify(obj);
   console.log(JSON.stringify(deviceInfo));
-//this.ws.send(JSON.stringify(deviceInfo));
+  this.ws.send(JSON.stringify(deviceInfo)); //need yto uncomment
 }
 
 }
