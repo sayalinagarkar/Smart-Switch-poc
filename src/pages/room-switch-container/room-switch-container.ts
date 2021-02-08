@@ -30,7 +30,7 @@ export class RoomSwitchContainerPage {
   deviceListConfiguration;
   totalDeviceStatus = [];
   pages1: Array<{ title: string; component: any }>;
-
+  roomName='';
   rootedIP;
   rooms: any = [];
   pages = "0";
@@ -62,7 +62,6 @@ export class RoomSwitchContainerPage {
             {
               text: "Add Rooted IP",
               handler: () => {
-                console.log("Buy clicked");
                 this.navCtrl.push(RootedIpInputModelPage);
               },
             },
@@ -97,7 +96,6 @@ export class RoomSwitchContainerPage {
           {
             text: "connect again",
             handler: () => {
-              console.log("Buy clicked");
               this.inItSocketConnection();
             },
           },
@@ -114,6 +112,7 @@ export class RoomSwitchContainerPage {
   initDeviceListConfiguration(): void {
     this.roomDetailsProvider.createAndAssignDeviceIndexArray();
     this.rooms = this.roomDetailsProvider.getAllRoomDetails();
+    this.roomName=this.rooms[Number(this.pages)];
     this.switchBoardList = this.roomDetailsProvider.getSwitchBoardList(
       Number(this.pages)
     );
@@ -141,13 +140,14 @@ export class RoomSwitchContainerPage {
     });
   }
   ionViewDidLoad() {
-    console.log("ionViewDidLoad RoomSwitchContainerPage");
   }
   selectedTab(index) {
     this.slider.slideTo(index);
+    this.roomName=this.rooms[Number(index)];
   }
   moveSlider($event) {
     this.pages = this.slider.getActiveIndex().toString();
+    this.roomName=this.rooms[Number(this.pages)];
     this.switchBoardList = this.roomDetailsProvider.getSwitchBoardList(
       Number(this.pages)
     );

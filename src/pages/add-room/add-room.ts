@@ -23,16 +23,16 @@ rooms=[];
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AddRoomPage');
+   // console.log('ionViewDidLoad AddRoomPage');
   }
 
   addRoom(){
 this.rooms= this.roomDetailsProvider.getAllRoomDetails();
 if(this.roomName!=='')
 {
-  console.log(this.roomName);
-  console.log(this.rooms);
-  console.log(this.rooms.findIndex(item => this.roomName.toLowerCase() === item.toLowerCase()))
+//  console.log(this.roomName);
+//  console.log(this.rooms);
+//  console.log(this.rooms.findIndex(item => this.roomName.toLowerCase() === item.toLowerCase()))
   if(this.rooms.length!==0 && this.rooms.findIndex(item => this.roomName.toLowerCase() === item.toLowerCase())!==-1
 
   ){

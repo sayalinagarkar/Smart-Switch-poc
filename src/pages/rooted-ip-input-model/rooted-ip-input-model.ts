@@ -18,9 +18,19 @@ import { RoomSwitchContainerPage } from '../room-switch-container/room-switch-co
 })
 export class RootedIpInputModelPage {
 rootedIP:string='';
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private viewCtrl: ViewController,public toastController: ToastController,
     private deviceListFormatterProvider: DeviceListFormatterProvider) {
+      this.deviceListFormatterProvider
+      .getRootedIPValueFromStorage()
+      .then((value) => {
+        this.rootedIP = value.toString();
+
+      })
+      .catch((error) => {
+        this.rootedIP = "";
+      })
   }
 
   ionViewDidLoad() {

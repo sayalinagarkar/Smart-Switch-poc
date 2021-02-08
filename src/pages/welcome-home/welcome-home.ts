@@ -18,13 +18,13 @@ export class WelcomeHomePage {
 houseName='';
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.houseName=this.navParams.get('houseName');
-    console.log(this.houseName);
+   // console.log(this.houseName);
   }
 
   ionViewDidLoad() {
     this.houseName=this.navParams.get('houseName');
-    console.log(this.houseName,"ion");
-    console.log('ionViewDidLoad WelcomeHomePage');
+  //  console.log(this.houseName,"ion");
+    //console.log('ionViewDidLoad WelcomeHomePage');
   }
 
   navigateToAddRoom(){

@@ -1,5 +1,6 @@
 
 <ion-grid class="grid-container">
+
   <ng-container  class="switch" *ngFor="let switchBoard of switchBoardList;let j=index">
     <div class="switchBoard">{{switchBoard.name.toUpperCase()}}</div>
   <ion-row>
@@ -28,7 +29,7 @@
             <ion-toggle
               class="toggle"
               [(ngModel)]="totalDeviceStatus[device.index]"
-              (ngModelChange)="updateToggle($event,i,device)"
+              (ngModelChange)="updateToggle($event,j,i,device)"
             ></ion-toggle>
           </div>
         </ion-col>

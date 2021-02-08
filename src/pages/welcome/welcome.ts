@@ -21,12 +21,10 @@ export class WelcomePage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad WelcomePage');
   }
 
   navigateToWelcomeHome(){
 if(this.houseName!==''){
-  console.log(this.houseName,"pre");
   this.storage.set('houseName',this.houseName);
   this.navCtrl.push(WelcomeHomePage,{houseName:this.houseName});
 }else{

@@ -20,14 +20,14 @@ export class DeviceDetailsComponent {
   @Input() deviceList;
   @Input() index;
   constructor( private roomDetailsProvider:RoomDetailsProvider) {
-    console.log('Hello DeviceDetailsComponent Component');
+   // console.log('Hello DeviceDetailsComponent Component');
     this.text = 'Hello World';
   }
   ngOnChanges() {
 
   }
    selectDevice(value){
-    console.log(value);
+   // console.log(value);
     this.deviceTypeIcon=this.deviceList[value];
     this.roomDetailsProvider.addNewDeviceType(this.index,value);
   }

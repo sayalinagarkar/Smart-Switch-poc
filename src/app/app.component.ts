@@ -46,7 +46,7 @@ public modalCtrl: ModalController,private storage: Storage) {
       this.splashScreen.hide();
       this.storage.get('houseName').then((value)=>{
         this.houseName=value;
-        console.log(this.houseName);
+        //console.log(this.houseName);
         if(this.houseName || this.houseName==='')
         this.rootPage=RoomSwitchContainerPage;
         else{

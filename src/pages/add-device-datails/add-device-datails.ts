@@ -37,7 +37,7 @@ export class AddDeviceDatailsPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AddDeviceDatailsPage');
+  //  console.log('ionViewDidLoad AddDeviceDatailsPage');
   }
 
   populateDeviceCard()
@@ -49,14 +49,14 @@ export class AddDeviceDatailsPage {
   }
 
   submitDeviceDetails(){
-console.log(this.roomDetailsProvider.getDeviceDetails());
+//console.log(this.roomDetailsProvider.getDeviceDetails());
 this.roomDetailsProvider.addNewSwitchBoardName(this.switchBoardName,this.currentRoom);
 this.navCtrl.setRoot(RoomSwitchContainerPage );
 
   }
 
   selectSwitchBoard(value){
-console.log("seletedSwitchBoard",value);
+//console.log("seletedSwitchBoard",value);
 this.switchBoardName=value;
 
   }

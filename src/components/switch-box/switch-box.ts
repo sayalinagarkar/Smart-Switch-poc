@@ -18,6 +18,7 @@ import { RoomDetailsProvider } from "../../providers/room-details/room-details";
 export class SwitchBoxComponent implements OnInit {
   @Input() deviceListConfigurationData: any;
   @Input() roomIndex: number;
+
   @Input() totalDeviceStatus;
   @Input() rootedIP: String;
   ws: any;
@@ -166,11 +167,12 @@ this.sendDeviceInfoToSocket(device, deviceStatus);
  //   }
   }
 
-  updateToggle(toggleValue, index, device) {
+  updateToggle(toggleValue, switchBoardIndex,index, device) {
     let deviceStatus = false;
     this.updateDeviceStatus( device.index,toggleValue,);
     if (this.totalDeviceStatus[device.index]) deviceStatus = true;
     this.sendDeviceInfoToSocket(device, deviceStatus);
+    this.roomDetailsProvider.updateToggleChangesDetails(toggleValue,switchBoardIndex,index,this.roomIndex);
   }
 
 

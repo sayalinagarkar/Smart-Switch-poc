@@ -49,48 +49,65 @@ export class WebsocketProvider  {
           "NodeName":  "1",
         });
   });
-  this.ws.addEventListener("error",()=>{
+//   this.ws.addEventListener("error",()=>{
 
-    const alert = this.alertCtrl.create({
-      title: 'Oh,snap something went wrong',
-      subTitle: 'Please try again',
-      buttons: [
+//     const alert = this.alertCtrl.create({
+//       title: 'Oh,snap something went wrong',
+//       subTitle: 'Please try again',
+//       buttons: [
 
-        {
-          text: 'close',
-          handler: () => {
+//         {
+//           text: 'close',
+//           handler: () => {
 
-          }
-        },
-        {
-          text: 'Try again',
-          handler: () => {
-            this.connectToSocket(this.rootedIP);
-          }
+//           }
+//         },
+//         {
+//           text: 'Try again',
+//           handler: () => {
+//             this.connectToSocket(this.rootedIP);
+//           }
+//         }
+//       ]
+//     });
+
+//     setTimeout(()=>{    alert.present();
+//     },4000);
+
+// });
+this.ws.addEventListener('close', (event) => {
+
+  const alert = this.alertCtrl.create({
+    title: 'Oops,connection has been closed',
+    subTitle: 'Please try again',
+    buttons: [
+
+      {
+        text: 'close',
+        handler: () => {
+
         }
-      ]
-    });
-
-    setTimeout(()=>{    alert.present();
-    },4000);
-
+      },
+      {
+        text: 'Try again',
+        handler: () => {
+          this.connectToSocket(this.rootedIP);
+        }
+      }
+    ]
+  });
+  alert.present();
+  console.log('The connection has been closed successfully.');
 });
+
   }
 
-  //This method is used to check connection
-  checkSocketConnection():boolean{
-    if (this.ws.readyState === WebSocket.OPEN) {
-      return true;
-    }
-    else{
-      return false;
-    }
 
-}
   //This method is used for receiving data from websocket server
   getData() {
     let observable = new Observable(observer => {
       this.ws.addEventListener('message', (data) => {
+
         console.log("data from server",data);
         observer.next(data.data);
       });
@@ -106,6 +123,11 @@ sendData(deviceInfo:any){
   //JSON.stringify(obj);
   console.log(JSON.stringify(deviceInfo));
   this.ws.send(JSON.stringify(deviceInfo)); //need yto uncomment
+}
+closeWebserver(){
+  this.ws.addEventListener("close",()=>{
+console.log("closed connedction")
+  });
 }
 
 }

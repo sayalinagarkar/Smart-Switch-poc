@@ -25,7 +25,7 @@ export class HomePage {
     public alertCtrl: AlertController,
     private websocketProvider:WebsocketProvider
   ) {
-    console.log("homepage");
+   // console.log("homepage");
     this.deviceListFormatterProvider.getRootedIPValueFromStorage().then((value)=>
      { this.rootedIP = value.toString();
    if(this.rootedIP){
@@ -36,7 +36,7 @@ export class HomePage {
     }
     ).catch((error)=>{
       this.rootedIP='';
-      console.log(error);
+     // console.log(error);
       const alert = this.alertCtrl.create({
         title: 'Rooted IP not found!',
         subTitle: 'Please register your rooted Ip again',
@@ -44,7 +44,6 @@ export class HomePage {
           {
             text: 'Add Rooted IP',
             handler: () => {
-              console.log('Buy clicked');
               this.navCtrl.push(RootedIpInputModelPage);
             }
           }
@@ -77,7 +76,6 @@ inItSocketConnection(){
           {
             text: 'connect again',
             handler: () => {
-              console.log('Buy clicked');
               this.inItSocketConnection();
             }
           },
@@ -97,7 +95,7 @@ inItSocketConnection(){
     let m=0;
     this.deviceList=this.deviceListFormatterProvider.getDeviceTypeList();
     this.deviceListConfiguration = this.deviceListFormatterProvider.getDeviceListConfiguration();
-    console.log(this.deviceListConfiguration[0])
+   // console.log(this.deviceListConfiguration[0])
     for(let i=0;i<this.deviceListConfiguration.length;i++){
       for(let k=0;k<this.deviceListConfiguration[i].length;k++)
       {
@@ -105,7 +103,7 @@ inItSocketConnection(){
 
     }
   }
-console.log(this.totalDeviceStatus);
+//console.log(this.totalDeviceStatus);
 }
   selectedTab(index) {
     this.slider.slideTo(index);
