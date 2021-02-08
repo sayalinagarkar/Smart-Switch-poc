@@ -28,7 +28,7 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-segment  *ngIf="rooms" color="dark" scrollable="true"
+  <ion-segment  *ngIf="rooms" color="dark" scrollable value="rooms"
   [(ngModel)]="pages">
     <ng-container  *ngFor="let room of rooms;let i=index">
     <ion-segment-button value="{{i}}" (click)="selectedTab(i)">
