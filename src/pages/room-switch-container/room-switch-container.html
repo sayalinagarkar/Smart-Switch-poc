@@ -25,25 +25,26 @@
   <ion-navbar>
     <ion-title class="page-header">OnPower</ion-title>
   </ion-navbar>
+
+  <ion-toolbar>
+    <ion-segment  *ngIf="rooms" color="dark" scrollable="true" value="rooms"
+    [(ngModel)]="pages">
+      <ng-container  *ngFor="let room of rooms;let i=index">
+        <ion-segment-button value="{{i}}" (click)="selectedTab(i)">
+          {{room}}
+        </ion-segment-button>
+      </ng-container>
+    </ion-segment>
+  </ion-toolbar>
+  
 </ion-header>
 
-<ion-content>
-  <ion-segment  *ngIf="rooms" color="dark" scrollable value="rooms"
-  [(ngModel)]="pages">
-    <ng-container  *ngFor="let room of rooms;let i=index">
-    <ion-segment-button value="{{i}}" (click)="selectedTab(i)">
-      {{room}}
-    </ion-segment-button>
-
-  </ng-container>
-
-  </ion-segment>
-
+ <ion-content padding>
+   
   <ion-slides #slider (ionSlideWillChange)="moveSlider($event)">
     <ion-slide *ngFor="let room of deviceListConfiguration ;let i=index">
       <switch-box [rootedIP]="rootedIP" [totalDeviceStatus]="totalDeviceStatus" [roomIndex]="i"  [deviceListConfigurationData]="room"></switch-box>
      </ion-slide>
-
   </ion-slides>
 
   <ion-fab right bottom>
