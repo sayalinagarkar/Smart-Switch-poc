@@ -25,19 +25,18 @@
   <ion-navbar>
     <ion-title class="page-header">OnPower</ion-title>
   </ion-navbar>
+</ion-header>
 
-  <ion-toolbar>
-    <ion-segment  *ngIf="rooms" color="dark" scrollable="true" value="rooms"
-    [(ngModel)]="pages">
+  <ion-scroll scrollX="true">
+    <ion-segment  *ngIf="rooms" color="dark" [(ngModel)]="pages">
       <ng-container  *ngFor="let room of rooms;let i=index">
         <ion-segment-button value="{{i}}" (click)="selectedTab(i)">
           {{room}}
         </ion-segment-button>
       </ng-container>
     </ion-segment>
-  </ion-toolbar>
-  
-</ion-header>
+  </ion-scroll>
+ 
 
  <ion-content padding>
    
