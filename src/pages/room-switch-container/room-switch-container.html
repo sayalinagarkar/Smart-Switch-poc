@@ -27,7 +27,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
   <ion-segment  *ngIf="rooms" color="dark" scrollable value="rooms"
   [(ngModel)]="pages">
     <ng-container  *ngFor="let room of rooms;let i=index">
