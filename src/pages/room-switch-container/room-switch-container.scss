@@ -70,7 +70,8 @@ page-room-switch-container {
     white-space: nowrap;
     font-size: 0;
     overflow: auto;
-
+    width: 500px;
+    
     &::-webkit-scrollbar {
         width: 0;
         height: 0;
