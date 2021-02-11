@@ -78,8 +78,9 @@ page-room-switch-container {
     }
 
     ion-segment-button.segment-button {
-        display: inline-block;
-        min-width: 125px;
+      display: inline-block!important;
+      min-width: 100px!important;
+      width: auto!important;
     }
   }
 }

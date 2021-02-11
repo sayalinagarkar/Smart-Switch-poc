@@ -154,8 +154,7 @@ export class RoomSwitchContainerPage {
     this.sendRoomChangedData();
     document.getElementById("segment-" + this.pages).scrollIntoView({
       behavior: 'smooth',
-      block: 'center',
-      inline: 'center'
+      block: 'center'
     });
   }
   sendRoomChangedData() {
