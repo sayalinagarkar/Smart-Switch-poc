@@ -152,6 +152,11 @@ export class RoomSwitchContainerPage {
       Number(this.pages)
     );
     this.sendRoomChangedData();
+    document.getElementById("segment-" + this.pages).scrollIntoView({
+      behavior: 'smooth',
+      block: 'center',
+      inline: 'center'
+    });
   }
   sendRoomChangedData() {
     for(let i=0;i<this.switchBoardList.length;i++)
