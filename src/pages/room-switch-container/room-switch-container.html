@@ -25,7 +25,7 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-segment  *ngIf="rooms" color="dark" scrollable="true" value="rooms"
+  <ion-segment #segments *ngIf="rooms" color="dark" scrollable="true" value="rooms"
     [(ngModel)]="pages">
       <ng-container  *ngFor="let room of rooms;let i=index">
         <ion-segment-button value="{{i}}" (click)="selectedTab(i)" id="segment-{{i}}">
@@ -34,7 +34,7 @@
       </ng-container>
     </ion-segment>
 
-  <ion-slides #slider (ionSlideWillChange)="moveSlider($event)">
+  <ion-slides #slider (ionSlideDidChange)="slideChanged()">
     <ion-slide *ngFor="let room of deviceListConfiguration ;let i=index">
       <switch-box [rootedIP]="rootedIP" [totalDeviceStatus]="totalDeviceStatus" [roomIndex]="i"  [deviceListConfigurationData]="room"></switch-box>
      </ion-slide>
