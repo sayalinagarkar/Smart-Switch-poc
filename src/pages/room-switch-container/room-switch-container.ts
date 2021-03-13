@@ -7,13 +7,16 @@ import {
   ToastController,
   AlertController,
 } from "ionic-angular";
+import{
+  timeout,
+} from "rxjs/operators";
 import { DeviceListFormatterProvider } from "../../providers/device-list-formatter/device-list-formatter";
 import { RoomDetailsProvider } from "../../providers/room-details/room-details";
 import { WebsocketProvider } from "../../providers/websocket/websocket";
 import { AddDeviceDatailsPage } from "../add-device-datails/add-device-datails";
 import { AddRoomPage } from "../add-room/add-room";
 import { RootedIpInputModelPage } from "../rooted-ip-input-model/rooted-ip-input-model";
-
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 /**
  * Generated class for the RoomSwitchContainerPage page.
  *
@@ -32,7 +35,9 @@ export class RoomSwitchContainerPage {
   totalDeviceStatus = [];
   pages1: Array<{ title: string; component: any }>;
   roomName='';
+  rootedIPRange=['192.168.29.125','192.168.29.126','192.168.29.127','192.168.29.128','192.168.29.129','192.168.29.130'];
   rootedIP;
+  Result;
   rooms: any = [];
   pages = "0";
   switchBoardList = [];
@@ -43,37 +48,59 @@ export class RoomSwitchContainerPage {
     private websocketProvider: WebsocketProvider,
     public toastController: ToastController,
     public alertCtrl: AlertController,
-    private deviceListFormatterProvider: DeviceListFormatterProvider
+    private deviceListFormatterProvider: DeviceListFormatterProvider,
+    public httpClient: HttpClient
   ) {
-    this.deviceListFormatterProvider
-      .getRootedIPValueFromStorage()
-      .then((value) => {
-        this.rootedIP = value.toString();
-        if (this.rootedIP) {
-          this.inItSocketConnection();
-        }
-      })
-      .catch((error) => {
-        this.rootedIP = "";
-        console.log(error);
-        const alert = this.alertCtrl.create({
-          title: "Rooted IP not found!",
-          subTitle: "Please register your rooted Ip again",
-          buttons: [
-            {
-              text: "Add Rooted IP",
-              handler: () => {
-                this.navCtrl.push(RootedIpInputModelPage);
-              },
-            },
-          ],
-        });
-        alert.present();
-      });
+       this.getData();
+       
+    // this.deviceListFormatterProvider
+    //   .getRootedIPValueFromStorage()
+    //   .then((value) => {
+    //     this.rootedIP = value.toString();
+    //     if (this.rootedIP) {
+    //       this.inItSocketConnection();
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     this.rootedIP = "";
+    //     console.log(error);
+    //     const alert = this.alertCtrl.create({
+    //       title: "Rooted IP not found!",
+    //       subTitle: "Please register your rooted Ip again",
+    //       buttons: [
+    //         {
+    //           text: "Add Rooted IP",
+    //           handler: () => {
+    //             this.navCtrl.push(RootedIpInputModelPage);
+    //           },
+    //         },
+    //       ],
+    //     });
+    //     alert.present();
+    //   });
 
     this.initDeviceListConfiguration();
 
   }
+
+
+  async getData(){
+    for(let rootedIPIndex = 0; rootedIPIndex < this.rootedIPRange.length;rootedIPIndex++)
+    {
+       const result = await this.checkCorrectUrl(this.rootedIPRange[rootedIPIndex])
+       if(result){
+        this.rootedIP = result + ":81/";
+        console.log("Rooted IP is");
+        console.log(this.rootedIP);
+        break;
+       }
+    }
+    if (this.rootedIP) 
+    {
+      this.inItSocketConnection();
+    }
+  }
+
   // Initialize slider
   ionViewDidEnter(){
     this.slideChanged();
@@ -252,4 +279,16 @@ export class RoomSwitchContainerPage {
   }
 
   deleteDevice() {}
+
+  async checkCorrectUrl(ip): Promise<any> {
+    try {
+      const headers = new HttpHeaders().set('Content-Type','text/plain; charset=utf-8')
+      const response = await this.httpClient.get(`http://${ip}/getIP`,{headers,responseType:'text'}).pipe(
+        timeout(2000)
+      ).toPromise();
+      return response
+    } catch (err) {
+      return false;
+    }
+  }
 }

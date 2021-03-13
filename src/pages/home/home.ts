@@ -4,7 +4,10 @@ import { DeviceListFormatterProvider } from "../../providers/device-list-formatt
 import { DeviceStatusCheckProvider } from "../../providers/device-status-check/device-status-check";
 import { WebsocketProvider } from "../../providers/websocket/websocket";
 import { RootedIpInputModelPage } from "../rooted-ip-input-model/rooted-ip-input-model";
-
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import{
+  timeout,
+} from "rxjs/operators";
 @Component({
   selector: "page-home",
   templateUrl: "home.html",
@@ -13,7 +16,9 @@ export class HomePage {
   deviceListConfiguration: any;
   pages = "0";
   dataServer;
-  rootedIP:string;
+  rootedIPRange=['192.168.29.125','192.168.29.126','192.168.29.127','192.168.29.128','192.168.29.129','192.168.29.130'];
+  rootedIP;
+  Result;
   @ViewChild("slider") slider: Slides;
   totalDeviceStatus=[];
   deviceList;
@@ -23,38 +28,58 @@ export class HomePage {
     private deviceListFormatterProvider: DeviceListFormatterProvider,
     private deviceStatusCheckProvider: DeviceStatusCheckProvider,
     public alertCtrl: AlertController,
-    private websocketProvider:WebsocketProvider
+    private websocketProvider:WebsocketProvider,
+    public httpClient: HttpClient
   ) {
+
+    this.getData();
    // console.log("homepage");
-    this.deviceListFormatterProvider.getRootedIPValueFromStorage().then((value)=>
-     { this.rootedIP = value.toString();
-   if(this.rootedIP){
-
-    this.inItSocketConnection();
-
-  }
-    }
-    ).catch((error)=>{
-      this.rootedIP='';
-     // console.log(error);
-      const alert = this.alertCtrl.create({
-        title: 'Rooted IP not found!',
-        subTitle: 'Please register your rooted Ip again',
-        buttons: [
-          {
-            text: 'Add Rooted IP',
-            handler: () => {
-              this.navCtrl.push(RootedIpInputModelPage);
-            }
-          }
-        ]
-      });
-      alert.present();
-}
-)
+//     this.deviceListFormatterProvider.getRootedIPValueFromStorage().then((value)=>
+//     { 
+//       this.rootedIP = value.toString();
+//       if(this.rootedIP){
+//       this.inItSocketConnection();
+//      }
+//     }
+//     ).catch((error)=>{
+//       this.rootedIP='';
+//      // console.log(error);
+//       const alert = this.alertCtrl.create({
+//         title: 'Rooted IP not found!',
+//         subTitle: 'Please register your rooted Ip again',
+//         buttons: [
+//           {
+//             text: 'Add Rooted IP',
+//             handler: () => {
+//               this.navCtrl.push(RootedIpInputModelPage);
+//             }
+//           }
+//         ]
+//       });
+//       alert.present();
+// }
+// )
 
     this.initDeviceListConfiguration();
 }
+
+async getData(){
+  for(let rootedIPIndex = 0; rootedIPIndex < this.rootedIPRange.length;rootedIPIndex++)
+  {
+     const result = await this.checkCorrectUrl(this.rootedIPRange[rootedIPIndex])
+     if(result){
+      this.rootedIP = result + ":81/";
+      console.log("Rooted IP is");
+      console.log(this.rootedIP);
+      break;
+     }
+  }
+  if (this.rootedIP) 
+  {
+    this.inItSocketConnection();
+  }
+}
+
 inItSocketConnection(){
  try{
   this.websocketProvider.connectToSocket(this.rootedIP);
@@ -120,5 +145,17 @@ inItSocketConnection(){
       "MsgNmbr": "103",
       "NodeName":  (Number(this.pages)+1).toString(),
     });
+  }
+
+  async checkCorrectUrl(ip): Promise<any> {
+    try {
+      const headers = new HttpHeaders().set('Content-Type','text/plain; charset=utf-8')
+      const response = await this.httpClient.get(`http://${ip}/getIP`,{headers,responseType:'text'}).pipe(
+        timeout(2000)
+      ).toPromise();
+      return response
+    } catch (err) {
+      return false;
+    }
   }
 }
