@@ -16,7 +16,10 @@ import { DeviceListFormatterProvider } from '../device-list-formatter/device-lis
 export class WebsocketProvider  {
   ws;
   rootedIP:String;
+  rootedIP1:String;
   isSocketConnected:boolean=false;
+
+  rootedIPRange=['192.168.29.125','192.168.29.126','192.168.29.127','192.168.29.128','192.168.29.129','192.168.29.130'];
   constructor(private deviceListFormatterProvider: DeviceListFormatterProvider,
     public alertCtrl: AlertController,public loadingCtrl: LoadingController
     ) {
@@ -25,61 +28,78 @@ export class WebsocketProvider  {
 
 //This method is used to connect to socket
   connectToSocket(rootedIP:String){
-    this.rootedIP=rootedIP;
-    this.ws = new WebSocket(`ws://${rootedIP}`);
+
+    let stopFlag=false;
+
+   let loading = this.loadingCtrl.create({
+            content: 'Connecting...'
+          });
+    for(let i=0;i<this.rootedIPRange.length;i++){
+      stopFlag=false;
+    this.rootedIP1=this.rootedIPRange[i];
+
+    this.ws = new WebSocket(`ws://${this.rootedIP1}:81`);
     //this.ws = new WebSocket(`ws://localhost:8082`);
 
-  let loading = this.loadingCtrl.create({
-    content: 'Connecting...'
-  });
+
+
 
   loading.present();
+setTimeout(() => {
+    loading.present();
+}, 1000);
 
-  setTimeout(() => {
-    loading.dismiss();
-  }, 4000);
-  console.log(`ws://${rootedIP}`);
+  console.log("trying to connect with:",`ws://${this.rootedIP1}`);
 
        this.ws.addEventListener("open",()=>{
          console.log("connected");
+         this.rootedIP=this.rootedIP1;
+         this.connectToSocketAgain();
        loading.dismiss();
+        stopFlag=true;
 
-        this.sendData({
-          "MsgNmbr": "103",
-          "NodeName":  "1",
-        });
+
   });
-//   this.ws.addEventListener("error",()=>{
+  if(stopFlag)
+  {
+    console.log("connected with IP",`ws://${this.rootedIP1}`);
+    break;
+  }
+}
+if(!stopFlag){
+loading.dismiss();
+   const alert = this.alertCtrl.create({
+      title: 'Cannot Connect to server',
+      subTitle: 'Please try again',
+      buttons: [
 
-//     const alert = this.alertCtrl.create({
-//       title: 'Oh,snap something went wrong',
-//       subTitle: 'Please try again',
-//       buttons: [
+        {
+          text: 'close',
+          handler: () => {
 
-//         {
-//           text: 'close',
-//           handler: () => {
+          }
+        },
+        {
+          text: 'Try again',
+          handler: () => {
+            this.connectToSocket(this.rootedIP);
+          }
+        }
+      ]
+    });
+    alert.present();
 
-//           }
-//         },
-//         {
-//           text: 'Try again',
-//           handler: () => {
-//             this.connectToSocket(this.rootedIP);
-//           }
-//         }
-//       ]
-//     });
+}
 
-//     setTimeout(()=>{    alert.present();
-//     },4000);
 
-// });
-this.ws.addEventListener('close', (event) => {
 
+
+
+}
+connectToSocketAgain(){
   const alert = this.alertCtrl.create({
-    title: 'Oops,connection has been closed',
-    subTitle: 'Please try again',
+    title: 'Connected',
+    subTitle: '',
     buttons: [
 
       {
@@ -88,21 +108,19 @@ this.ws.addEventListener('close', (event) => {
 
         }
       },
-      {
-        text: 'Try again',
-        handler: () => {
-          this.connectToSocket(this.rootedIP);
-        }
-      }
+
     ]
   });
-  alert.present();
-  console.log('The connection has been closed successfully.');
+  this.ws = new WebSocket(`ws://${this.rootedIP}:81`);
+
+  this.ws.addEventListener("open",()=>{
+    console.log("connected with ",`ws://${this.rootedIP}:81`);
+    alert.present();
+
+
 });
 
-  }
-
-
+}
   //This method is used for receiving data from websocket server
   getData() {
     let observable = new Observable(observer => {
@@ -124,6 +142,7 @@ sendData(deviceInfo:any){
   console.log(JSON.stringify(deviceInfo));
   this.ws.send(JSON.stringify(deviceInfo)); //need yto uncomment
 }
+
 closeWebserver(){
   this.ws.addEventListener("close",()=>{
 console.log("closed connedction")

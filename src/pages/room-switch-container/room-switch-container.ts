@@ -45,32 +45,8 @@ export class RoomSwitchContainerPage {
     public alertCtrl: AlertController,
     private deviceListFormatterProvider: DeviceListFormatterProvider
   ) {
-    this.deviceListFormatterProvider
-      .getRootedIPValueFromStorage()
-      .then((value) => {
-        this.rootedIP = value.toString();
-        if (this.rootedIP) {
-          this.inItSocketConnection();
-        }
-      })
-      .catch((error) => {
-        this.rootedIP = "";
-        console.log(error);
-        const alert = this.alertCtrl.create({
-          title: "Rooted IP not found!",
-          subTitle: "Please register your rooted Ip again",
-          buttons: [
-            {
-              text: "Add Rooted IP",
-              handler: () => {
-                this.navCtrl.push(RootedIpInputModelPage);
-              },
-            },
-          ],
-        });
-        alert.present();
-      });
-
+    this.inItSocketConnection();
+    
     this.initDeviceListConfiguration();
 
   }
@@ -86,7 +62,7 @@ export class RoomSwitchContainerPage {
   inItSocketConnection() {
     try {
       this.websocketProvider.connectToSocket(this.rootedIP);
-
+      console.log("called connect room ")
       this.websocketProvider.getData().subscribe((data: any) => {
         console.log("data passed to function", data);
         this.roomDetailsProvider.setNewDeviceData(data);
@@ -95,23 +71,23 @@ export class RoomSwitchContainerPage {
     } catch (error) {
       this.rootedIP = "";
       console.log(error);
-      const alert = this.alertCtrl.create({
-        title: "Sorry,cannot connect to server",
-        subTitle: "please try again",
-        buttons: [
-          {
-            text: "connect again",
-            handler: () => {
-              this.inItSocketConnection();
-            },
-          },
-          {
-            text: "close",
-            handler: () => {},
-          },
-        ],
-      });
-      alert.present();
+      // const alert = this.alertCtrl.create({
+      //   title: "Sorry,cannot connect to server",
+      //   subTitle: "please try again",
+      //   buttons: [
+      //     {
+      //       text: "connect again",
+      //       handler: () => {
+      //         this.inItSocketConnection();
+      //       },
+      //     },
+      //     {
+      //       text: "close",
+      //       handler: () => {},
+      //     },
+      //   ],
+      // });
+      // alert.present();
     }
   }
 

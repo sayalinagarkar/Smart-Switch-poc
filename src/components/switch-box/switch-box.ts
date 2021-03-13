@@ -58,25 +58,7 @@ export class SwitchBoxComponent implements OnInit {
   }
   ngOnInit() {
     console.log(this.rootedIP);
-    // if (this.rootedIP) this.websocketProvider.connectToSocket(this.rootedIP);
-    // this.ws = new WebSocket("ws://localhost:8082");
-    //   this.ws.addEventListener("open",()=>{
-    //     console.log('connected');
-
-    // })
-
-    //   if(this.websocketProvider.checkSocketConnection()){
-    //     console.log("susbsfkjs");
-    //   this.websocketProvider.getData().subscribe((data) => {
-    //     console.log("data from server", data);
-    //   });
-    // }
-
-    this._subscription = this.deviceListFormatterProvider.rootedIPChange.subscribe(
-      (value) => {
-        this.rootedIP = value;
-      }
-    );
+    
     this._subscription = this.roomDetailsProvider.fanSpeedChange.subscribe(
       (value) => {
         this.currentSpeed = value;
@@ -138,7 +120,7 @@ this.sendDeviceInfoToSocket(device, deviceStatus);
 
   }
   increment(device,deviceStatus){
-    if(this.currentSpeed<4)
+    if(this.currentSpeed<5)
   this.currentSpeed++;
   if(deviceStatus)
 this.sendDeviceInfoToSocket(device, deviceStatus);
@@ -147,7 +129,7 @@ this.sendDeviceInfoToSocket(device, deviceStatus);
     console.log("device",device);
    // if (this.websocketProvider.checkSocketConnection){
 
-      if(device.name ==='Fan'){
+      if(device.deviceID ==='Fan1'){
         this.websocketProvider.sendData({
           "MsgNmbr": "102",
           "Pin": device.deviceID,
