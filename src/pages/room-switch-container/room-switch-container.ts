@@ -79,7 +79,7 @@ export class RoomSwitchContainerPage {
         },1000);
        const result = await this.checkCorrectUrl(this.rootedIPRange[rootedIPIndex]);
        console.log("trying rootedIP",result);
-       if(true){
+       if(result){
         this.rootedIP = result + ":81/";
         //this.rootedIP='localhost:8082';
         console.log("Rooted IP is");
