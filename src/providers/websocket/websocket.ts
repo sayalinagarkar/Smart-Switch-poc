@@ -3,7 +3,10 @@ import { Injectable, OnInit } from '@angular/core';
 import { AlertController, LoadingController } from 'ionic-angular';
 import { Observable } from 'rxjs';
 import { DeviceListFormatterProvider } from '../device-list-formatter/device-list-formatter';
-
+import {  HttpHeaders } from '@angular/common/http';
+import{
+  timeout,
+} from "rxjs/operators";
 /*
   Generated class for the WebsocketProvider provider.
 
@@ -16,26 +19,82 @@ import { DeviceListFormatterProvider } from '../device-list-formatter/device-lis
 export class WebsocketProvider  {
   ws;
   rootedIP:String;
+  rootedIPRange=['192.168.29.125','192.168.29.126','192.168.29.127','192.168.29.128','192.168.29.129','192.168.29.130'];
+  //rootedIPRange=['192.168.0.25','192.168.0.26','192.168.0.27','192.168.0.28','192.168.0.29','192.168.0.30',
+    //              '192.168.0.31','192.168.0.32','192.168.0.33','192.168.0.34','192.168.0.35']
+  loading:any;
   isSocketConnected:boolean=false;
   constructor(private deviceListFormatterProvider: DeviceListFormatterProvider,
-    public alertCtrl: AlertController,public loadingCtrl: LoadingController
+    public alertCtrl: AlertController,public loadingCtrl: LoadingController,public httpClient: HttpClient
     ) {
 
 }
+// async getRootedIPData(){
+//   this.loading = this.loadingCtrl.create({
+//     content: 'Connecting...'
+//   });
+//   let foundRootedIPFlag=false;
+//   for(let rootedIPIndex = 0; rootedIPIndex < this.rootedIPRange.length;rootedIPIndex++)
+//   {
+//     foundRootedIPFlag=false;
+//     this.loading.present();
+//      const result = await this.checkCorrectUrl(this.rootedIPRange[rootedIPIndex])
+//      if(result){
+//       this.rootedIP = result + ":81/";
+//       console.log("Rooted IP is");
+//       console.log(this.rootedIP);
+//       foundRootedIPFlag=true;
+//       break;
+//      }
+//   }
+//   if(!foundRootedIPFlag){
+//     const alert = this.alertCtrl.create({
+//             title: 'No correct rooted IP found',
+//             subTitle: 'Please try again',
+//             buttons: [
+
+//               {
+//                 text: 'close',
+//                 handler: () => {
+
+//                 }
+//               },
+//               {
+//                 text: 'Try again',
+//                 handler: () => {
+//                   this.getRootedIPData();
+//                 }
+//               }
+//             ]
+//           });
+//   }
+//   if (this.rootedIP)
+//   {
+//     this.connectToSocket(this.rootedIP);
+//   }
+// }
+// async checkCorrectUrl(ip): Promise<any> {
+//   try {
+//     const headers = new HttpHeaders().set('Content-Type','text/plain; charset=utf-8')
+//     const response = await this.httpClient.get(`http://${ip}/getIP`,{headers,responseType:'text'}).pipe(
+//       timeout(2000)
+//     ).toPromise();
+//     return response
+//   } catch (err) {
+//     return false;
+//   }
+// }
 
 //This method is used to connect to socket
   connectToSocket(rootedIP:String){
     this.rootedIP=rootedIP;
+    let loading = this.loadingCtrl.create({
+          content: 'Connecting with rooted IP...'
+        });
+        loading.present();
     this.ws = new WebSocket(`ws://${rootedIP}`);
     //this.ws = new WebSocket(`ws://localhost:8082`);
-
-  let loading = this.loadingCtrl.create({
-    content: 'Connecting...'
-  });
-
-  loading.present();
-
-  setTimeout(() => {
+    setTimeout(() => {
     loading.dismiss();
   }, 4000);
   console.log(`ws://${rootedIP}`);
@@ -44,10 +103,7 @@ export class WebsocketProvider  {
          console.log("connected");
        loading.dismiss();
 
-        this.sendData({
-          "MsgNmbr": "103",
-          "NodeName":  "1",
-        });
+
   });
 //   this.ws.addEventListener("error",()=>{
 
@@ -107,7 +163,7 @@ this.ws.addEventListener('close', (event) => {
   getData() {
     let observable = new Observable(observer => {
       this.ws.addEventListener('message', (data) => {
-
+        console.log("getDAta");
         console.log("data from server",data);
         observer.next(data.data);
       });

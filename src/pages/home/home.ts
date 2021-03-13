@@ -33,33 +33,6 @@ export class HomePage {
   ) {
 
     this.getData();
-   // console.log("homepage");
-//     this.deviceListFormatterProvider.getRootedIPValueFromStorage().then((value)=>
-//     { 
-//       this.rootedIP = value.toString();
-//       if(this.rootedIP){
-//       this.inItSocketConnection();
-//      }
-//     }
-//     ).catch((error)=>{
-//       this.rootedIP='';
-//      // console.log(error);
-//       const alert = this.alertCtrl.create({
-//         title: 'Rooted IP not found!',
-//         subTitle: 'Please register your rooted Ip again',
-//         buttons: [
-//           {
-//             text: 'Add Rooted IP',
-//             handler: () => {
-//               this.navCtrl.push(RootedIpInputModelPage);
-//             }
-//           }
-//         ]
-//       });
-//       alert.present();
-// }
-// )
-
     this.initDeviceListConfiguration();
 }
 
@@ -74,7 +47,7 @@ async getData(){
       break;
      }
   }
-  if (this.rootedIP) 
+  if (this.rootedIP)
   {
     this.inItSocketConnection();
   }

@@ -147,7 +147,7 @@ this.sendDeviceInfoToSocket(device, deviceStatus);
     console.log("device",device);
    // if (this.websocketProvider.checkSocketConnection){
 
-      if(device.name ==='Fan'){
+      if(device.deviceID ==='Fan1'){
         this.websocketProvider.sendData({
           "MsgNmbr": "102",
           "Pin": device.deviceID,

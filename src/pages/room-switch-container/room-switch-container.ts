@@ -17,6 +17,7 @@ import { AddDeviceDatailsPage } from "../add-device-datails/add-device-datails";
 import { AddRoomPage } from "../add-room/add-room";
 import { RootedIpInputModelPage } from "../rooted-ip-input-model/rooted-ip-input-model";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {  LoadingController } from 'ionic-angular';
 /**
  * Generated class for the RoomSwitchContainerPage page.
  *
@@ -36,6 +37,9 @@ export class RoomSwitchContainerPage {
   pages1: Array<{ title: string; component: any }>;
   roomName='';
   rootedIPRange=['192.168.29.125','192.168.29.126','192.168.29.127','192.168.29.128','192.168.29.129','192.168.29.130'];
+  //rootedIPRange=['192.168.0.25','192.168.0.26','192.168.0.27','192.168.0.28','192.168.0.29','192.168.0.30',
+    //           '192.168.0.31','192.168.0.32']
+ // rootedIPRange=['']
   rootedIP;
   Result;
   rooms: any = [];
@@ -44,6 +48,7 @@ export class RoomSwitchContainerPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
+    public loadingCtrl: LoadingController,
     public roomDetailsProvider: RoomDetailsProvider,
     private websocketProvider: WebsocketProvider,
     public toastController: ToastController,
@@ -51,55 +56,84 @@ export class RoomSwitchContainerPage {
     private deviceListFormatterProvider: DeviceListFormatterProvider,
     public httpClient: HttpClient
   ) {
-       this.getData();
-       
-    // this.deviceListFormatterProvider
-    //   .getRootedIPValueFromStorage()
-    //   .then((value) => {
-    //     this.rootedIP = value.toString();
-    //     if (this.rootedIP) {
-    //       this.inItSocketConnection();
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     this.rootedIP = "";
-    //     console.log(error);
-    //     const alert = this.alertCtrl.create({
-    //       title: "Rooted IP not found!",
-    //       subTitle: "Please register your rooted Ip again",
-    //       buttons: [
-    //         {
-    //           text: "Add Rooted IP",
-    //           handler: () => {
-    //             this.navCtrl.push(RootedIpInputModelPage);
-    //           },
-    //         },
-    //       ],
-    //     });
-    //     alert.present();
-    //   });
-
-    this.initDeviceListConfiguration();
+      this.initDeviceListConfiguration();
+      this.getRootedIPData();
+      // this.websocketProvider.getData().subscribe((data: any) => {
+      //   console.log("data passed to function", data);
+      //   this.roomDetailsProvider.setNewDeviceData(data);
+      //   this.initDeviceListConfiguration();
+      // });
 
   }
 
-
-  async getData(){
+  async getRootedIPData(){
+    let loading = this.loadingCtrl.create({
+      content: 'Extracting rootedIP'
+    });
+    let foundRootedIPFlag=false;
     for(let rootedIPIndex = 0; rootedIPIndex < this.rootedIPRange.length;rootedIPIndex++)
     {
-       const result = await this.checkCorrectUrl(this.rootedIPRange[rootedIPIndex])
-       if(result){
+      foundRootedIPFlag=false;
+        setTimeout(()=>{
+          loading.present();
+        },1000);
+       const result = await this.checkCorrectUrl(this.rootedIPRange[rootedIPIndex]);
+       console.log("trying rootedIP",result);
+       if(true){
         this.rootedIP = result + ":81/";
+        //this.rootedIP='localhost:8082';
         console.log("Rooted IP is");
         console.log(this.rootedIP);
+        foundRootedIPFlag=true;
+         loading.dismiss();
         break;
        }
     }
-    if (this.rootedIP) 
+    if(!foundRootedIPFlag){
+       loading.dismiss();
+      const alert = this.alertCtrl.create({
+              title: 'No correct rooted IP found',
+              subTitle: 'Please try again',
+              buttons: [
+
+                {
+                  text: 'close',
+                  handler: () => {
+
+                  }
+                },
+                {
+                  text: 'Try again',
+                  handler: () => {
+                    this.getRootedIPData();
+                  }
+                }
+              ]
+            });
+            alert.present();
+    }
+    if (this.rootedIP)
     {
       this.inItSocketConnection();
     }
   }
+
+  // async getData(){
+  //   for(let rootedIPIndex = 0; rootedIPIndex < this.rootedIPRange.length;rootedIPIndex++)
+  //   {
+  //      const result = await this.checkCorrectUrl(this.rootedIPRange[rootedIPIndex])
+  //      if(result){
+  //       this.rootedIP = result + ":81/";
+  //       console.log("Rooted IP is");
+  //       console.log(this.rootedIP);
+  //       break;
+  //      }
+  //   }
+  //   if (this.rootedIP)
+  //   {
+  //     this.inItSocketConnection();
+  //   }
+  // }
 
   // Initialize slider
   ionViewDidEnter(){
@@ -110,15 +144,18 @@ export class RoomSwitchContainerPage {
     this.navCtrl.push(RootedIpInputModelPage);
 
   }
+  getData(){
+
+  }
   inItSocketConnection() {
     try {
       this.websocketProvider.connectToSocket(this.rootedIP);
-
       this.websocketProvider.getData().subscribe((data: any) => {
         console.log("data passed to function", data);
         this.roomDetailsProvider.setNewDeviceData(data);
         this.initDeviceListConfiguration();
       });
+
     } catch (error) {
       this.rootedIP = "";
       console.log(error);
@@ -151,6 +188,7 @@ export class RoomSwitchContainerPage {
     );
     this.totalDeviceStatus = this.roomDetailsProvider.getDeviceArray();
     this.deviceListConfiguration = this.roomDetailsProvider.getAllDetails();
+
 
   }
 

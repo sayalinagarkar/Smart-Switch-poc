@@ -10,7 +10,7 @@ import { Subject } from "rxjs";
 */
 @Injectable()
 export class RoomDetailsProvider {
-  rooms = ['Living Room','Upper Hall','BedRoom','Kids Room',' Master BedRoom'];
+  rooms = ['Living Room','BedRoom',' Master BedRoom'];
   deviceArray = [];
   fanSpeed='';
   fanSpeedChange: Subject<number> = new Subject<number>();
@@ -24,7 +24,7 @@ export class RoomDetailsProvider {
         {
           name: "Bulb",
           index: 0,
-          nodeValue: 3,
+          nodeValue: 2,
           iconUrl: "../../assets/imgs/bulb.png",
           iconUrlSwitchOn: "../../assets/imgs/bulb-on.png",
           toggleValue: false,
@@ -34,7 +34,7 @@ export class RoomDetailsProvider {
         {
           name: "Bulb",
           index: 1,
-          nodeValue: 3,
+          nodeValue: 2,
           iconUrl: "../../assets/imgs/bulb.png",
           iconUrlSwitchOn: "../../assets/imgs/bulb-on.png",
           toggleValue: false,
@@ -44,7 +44,7 @@ export class RoomDetailsProvider {
         {
           name: "Bulb",
           index: 2,
-          nodeValue: 3,
+          nodeValue: 2,
           iconUrl: "../../assets/imgs/bulb.png",
           iconUrlSwitchOn: "../../assets/imgs/bulb-on.png",
           toggleValue: false,
@@ -55,7 +55,7 @@ export class RoomDetailsProvider {
           {
           name: "Fan",
           index: 3,
-          nodeValue: 3,
+          nodeValue: 2,
           iconUrl: "../../assets/imgs/fan.png",
           iconUrlSwitchOn: "../../assets/imgs/fan-on.png",
           toggleValue: false,
@@ -71,7 +71,7 @@ export class RoomDetailsProvider {
         {
           name: "Bulb",
           index: 4,
-          nodeValue: 4,
+          nodeValue: 1,
           iconUrl: "../../assets/imgs/bulb.png",
           iconUrlSwitchOn: "../../assets/imgs/bulb-on.png",
           toggleValue: false,
@@ -81,7 +81,7 @@ export class RoomDetailsProvider {
         {
           name: "Bulb",
           index: 5,
-          nodeValue: 4,
+          nodeValue: 1,
           iconUrl: "../../assets/imgs/bulb.png",
           iconUrlSwitchOn: "../../assets/imgs/bulb-on.png",
           toggleValue: false,
@@ -91,7 +91,7 @@ export class RoomDetailsProvider {
         {
           name: "Bulb",
           index: 6,
-          nodeValue: 4,
+          nodeValue: 1,
           iconUrl: "../../assets/imgs/bulb.png",
           iconUrlSwitchOn: "../../assets/imgs/bulb-on.png",
           toggleValue: false,
@@ -102,7 +102,7 @@ export class RoomDetailsProvider {
           {
           name: "Fan",
           index: 7,
-          nodeValue: 4,
+          nodeValue: 1,
           iconUrl: "../../assets/imgs/fan.png",
           iconUrlSwitchOn: "../../assets/imgs/fan-on.png",
           toggleValue: false,
@@ -118,7 +118,7 @@ export class RoomDetailsProvider {
         {
           name: "Bulb",
           index: 8,
-          nodeValue: 2,
+          nodeValue: 3,
           iconUrl: "../../assets/imgs/bulb.png",
           iconUrlSwitchOn: "../../assets/imgs/bulb-on.png",
           toggleValue: false,
@@ -128,7 +128,7 @@ export class RoomDetailsProvider {
         {
           name: "Bulb",
           index: 9,
-          nodeValue: 2,
+          nodeValue: 3,
           iconUrl: "../../assets/imgs/bulb.png",
           iconUrlSwitchOn: "../../assets/imgs/bulb-on.png",
           toggleValue: false,
@@ -136,118 +136,20 @@ export class RoomDetailsProvider {
           Speed: 0,
         },
         {
-          name: "Bulb",
+          name: "Fan",
           index: 10,
-          nodeValue: 2,
-          iconUrl: "../../assets/imgs/bulb.png",
-          iconUrlSwitchOn: "../../assets/imgs/bulb-on.png",
+          nodeValue: 3,
+          iconUrl: "../../assets/imgs/fan.png",
+          iconUrlSwitchOn: "../../assets/imgs/fan-on.png",
           toggleValue: false,
           deviceID: "Relay3",
           Speed: 0,
         },
-        {
-          name: "Fan",
-          index: 11,
-          nodeValue: 2,
-          iconUrl: "../../assets/imgs/fan.png",
-          iconUrlSwitchOn: "../../assets/imgs/fan-on.png",
-          toggleValue: false,
-          deviceID: "Fan1",
-          Speed: 0,
-        },
+
       ], //switchboard 4 end
     ], //room 2 end
-   [  //room 2 start
-     [
-      //switchboard 3 start
-      {
-        name: "Bulb",
-        index: 12,
-        nodeValue: 5,
-        iconUrl: "../../assets/imgs/bulb.png",
-        iconUrlSwitchOn: "../../assets/imgs/bulb-on.png",
-        toggleValue: false,
-        deviceID: "Relay1",
-        Speed: 0,
-      },
-      {
-        name: "Bulb",
-        index: 13,
-        nodeValue: 5,
-        iconUrl: "../../assets/imgs/bulb.png",
-        iconUrlSwitchOn: "../../assets/imgs/bulb-on.png",
-        toggleValue: false,
-        deviceID: "Relay2",
-        Speed: 0,
-      },
-      {
-        name: "Bulb",
-        index: 14,
-        nodeValue: 5,
-        iconUrl: "../../assets/imgs/bulb.png",
-        iconUrlSwitchOn: "../../assets/imgs/bulb-on.png",
-        toggleValue: false,
-        deviceID: "Relay3",
-        Speed: 0,
-      },
-      {
-        name: "Fan",
-        index: 15,
-        nodeValue: 5,
-        iconUrl: "../../assets/imgs/fan.png",
-        iconUrlSwitchOn: "../../assets/imgs/fan-on.png",
-        toggleValue: false,
-        deviceID: "Fan1",
-        Speed: 0,
-      },
-    ], //switchboard 4 end
-  ],
-  [
-  [
-    //switchboard1 start
-    {
-      name: "Bulb",
-      index: 16,
-      nodeValue: 1,
-      iconUrl: "../../assets/imgs/bulb.png",
-      iconUrlSwitchOn: "../../assets/imgs/bulb-on.png",
-      toggleValue: false,
-      deviceID: "Relay1",
-      Speed: 0,
-    },
-    {
-      name: "Bulb",
-      index: 17,
-      nodeValue: 1,
-      iconUrl: "../../assets/imgs/bulb.png",
-      iconUrlSwitchOn: "../../assets/imgs/bulb-on.png",
-      toggleValue: false,
-      deviceID: "Relay2",
-      Speed: 0,
-    },
-    {
-      name: "Bulb",
-      index: 18,
-      nodeValue: 1,
-      iconUrl: "../../assets/imgs/bulb.png",
-      iconUrlSwitchOn: "../../assets/imgs/bulb-on.png",
-      toggleValue: false,
-      deviceID: "Relay3",
-      Speed: 0,
-    },
-    //switchboard2 start
-      {
-      name: "Fan",
-      index: 19,
-      nodeValue: 1,
-      iconUrl: "../../assets/imgs/fan.png",
-      iconUrlSwitchOn: "../../assets/imgs/fan-on.png",
-      toggleValue: false,
-      deviceID: "Fan1",
-      Speed: 0,
-    },
-  ],
-],
+
+
  ]; //total end
 
   //createRoomData=[];
