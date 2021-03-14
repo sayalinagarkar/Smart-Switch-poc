@@ -58,11 +58,11 @@ export class RoomSwitchContainerPage {
   ) {
       this.initDeviceListConfiguration();
       this.getRootedIPData();
-      // this.websocketProvider.getData().subscribe((data: any) => {
-      //   console.log("data passed to function", data);
-      //   this.roomDetailsProvider.setNewDeviceData(data);
-      //   this.initDeviceListConfiguration();
-      // });
+      this.websocketProvider.getData().subscribe((data: any) => {
+        console.log("data passed to function", data);
+        this.roomDetailsProvider.setNewDeviceData(data);
+        this.initDeviceListConfiguration();
+      });
 
   }
 
@@ -76,10 +76,10 @@ export class RoomSwitchContainerPage {
       foundRootedIPFlag=false;
         setTimeout(()=>{
           loading.present();
-        },1000);
+        },100);
        const result = await this.checkCorrectUrl(this.rootedIPRange[rootedIPIndex]);
        console.log("trying rootedIP",result);
-       if(true){
+       if(result){
         this.rootedIP = result + ":81/";
         //this.rootedIP='localhost:8082';
         console.log("Rooted IP is");
@@ -150,11 +150,11 @@ export class RoomSwitchContainerPage {
   inItSocketConnection() {
     try {
       this.websocketProvider.connectToSocket(this.rootedIP);
-      this.websocketProvider.getData().subscribe((data: any) => {
-        console.log("data passed to function", data);
-        this.roomDetailsProvider.setNewDeviceData(data);
-        this.initDeviceListConfiguration();
-      });
+      // this.websocketProvider.getData().subscribe((data: any) => {
+      //   console.log("data passed to function", data);
+      //   this.roomDetailsProvider.setNewDeviceData(data);
+      //   this.initDeviceListConfiguration();
+      // });
 
     } catch (error) {
       this.rootedIP = "";
@@ -182,7 +182,7 @@ export class RoomSwitchContainerPage {
   initDeviceListConfiguration(): void {
     this.roomDetailsProvider.createAndAssignDeviceIndexArray();
     this.rooms = this.roomDetailsProvider.getAllRoomDetails();
-    this.roomName=this.rooms[Number(this.pages)];
+    //this.roomName=this.rooms[Number(this.pages)];
     this.switchBoardList = this.roomDetailsProvider.getSwitchBoardList(
       Number(this.pages)
     );

@@ -138,7 +138,7 @@ this.sendDeviceInfoToSocket(device, deviceStatus);
 
   }
   increment(device,deviceStatus){
-    if(this.currentSpeed<4)
+    if(this.currentSpeed<5)
   this.currentSpeed++;
   if(deviceStatus)
 this.sendDeviceInfoToSocket(device, deviceStatus);
