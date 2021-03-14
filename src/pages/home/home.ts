@@ -16,7 +16,8 @@ export class HomePage {
   deviceListConfiguration: any;
   pages = "0";
   dataServer;
-  rootedIPRange=['192.168.29.125','192.168.29.126','192.168.29.127','192.168.29.128','192.168.29.129','192.168.29.130'];
+  //rootedIPRange=['192.168.29.125','192.168.29.126','192.168.29.127','192.168.29.128','192.168.29.129','192.168.29.130'];
+  rootedIPRange=['10.247.171.1','10.120.185.1','10.199.20.1','10.126.150.1'];
   rootedIP;
   Result;
   @ViewChild("slider") slider: Slides;
