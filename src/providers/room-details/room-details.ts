@@ -155,11 +155,9 @@ export class RoomDetailsProvider {
   //createRoomData=[];
   deviceDetails = [{ name: "", type: "" }];
   switchBoardList = [
-    { name: "SwitchBoard1", roomNumber: 1, node: 3 },
-    { name: "SwitchBoard1", roomNumber: 2, node: 4 },
-    { name: "SwitchBoard1", roomNumber: 3, node: 2 },
-    { name: "SwitchBoard1", roomNumber: 4, node: 5 },
-    { name: "SwitchBoard1", roomNumber: 5, node: 1 }
+    { name: "SwitchBoard1", roomNumber: 1, node: 2 },
+    { name: "SwitchBoard1", roomNumber: 2, node: 1 },
+    { name: "SwitchBoard1", roomNumber: 3, node: 3 }
   ];
   switchBoardIndex = 0;
   deviceIndex = 0;
@@ -257,7 +255,7 @@ for(let i=0;i<this.switchBoardList.length;i++){
     // console.log(nodeValue1);
     // console.log(this.createRoomData[currentRoom].length);
     // console.log(this.createRoomData);
-    for (let i = 0; i < this.createRoomData[currentRoom].length; i++) {
+    for (let i = 0; i < this.createRoomData[currentRoom].length; i++) { //length undefined
       for (let j = 0; j < this.createRoomData[currentRoom][i].length; j++) {
      //   console.log(this.createRoomData[currentRoom][i][j].nodeValue);
         if (this.createRoomData[currentRoom][i][j].nodeValue === nodeValue1)
@@ -462,6 +460,8 @@ for(let i=0;i<this.switchBoardList.length;i++){
  console.log(msgNumber,"msgNumber");
  let node=Number(data.NodeName);
  let currentRoom=this.getRoomNumberContainingSwitchBoard(node)-1;//from room details
+ console.log(currentRoom, "currentRoom");
+ console.log(node,"node");
  let switchBoardIndexInRoom=this.findswitchBoardIndexInRoom(currentRoom,node);
  console.log(switchBoardIndexInRoom,"switchBoardIndexINROom");
  console.log(data["NodeName"]);

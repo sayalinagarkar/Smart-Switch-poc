@@ -3,10 +3,6 @@ import { Injectable, OnInit } from '@angular/core';
 import { AlertController, LoadingController } from 'ionic-angular';
 import { Observable } from 'rxjs';
 import { DeviceListFormatterProvider } from '../device-list-formatter/device-list-formatter';
-import {  HttpHeaders } from '@angular/common/http';
-import{
-  timeout,
-} from "rxjs/operators";
 /*
   Generated class for the WebsocketProvider provider.
 

@@ -36,10 +36,11 @@ export class RoomSwitchContainerPage {
   totalDeviceStatus = [];
   pages1: Array<{ title: string; component: any }>;
   roomName='';
-  rootedIPRange=['192.168.29.125','192.168.29.126','192.168.29.127','192.168.29.128','192.168.29.129','192.168.29.130'];
+  //rootedIPRange=['192.168.29.125','192.168.29.126','192.168.29.127','192.168.29.128','192.168.29.129','192.168.29.130'];
   //rootedIPRange=['192.168.0.25','192.168.0.26','192.168.0.27','192.168.0.28','192.168.0.29','192.168.0.30',
     //           '192.168.0.31','192.168.0.32']
  // rootedIPRange=['']
+ rootedIPRange=['10.247.171.1','10.120.185.1','10.199.20.1','10.126.150.1'];
   rootedIP;
   Result;
   rooms: any = [];
@@ -58,12 +59,6 @@ export class RoomSwitchContainerPage {
   ) {
       this.initDeviceListConfiguration();
       this.getRootedIPData();
-      this.websocketProvider.getData().subscribe((data: any) => {
-        console.log("data passed to function", data);
-        this.roomDetailsProvider.setNewDeviceData(data);
-        this.initDeviceListConfiguration();
-      });
-
   }
 
   async getRootedIPData(){
@@ -74,9 +69,7 @@ export class RoomSwitchContainerPage {
     for(let rootedIPIndex = 0; rootedIPIndex < this.rootedIPRange.length;rootedIPIndex++)
     {
       foundRootedIPFlag=false;
-        setTimeout(()=>{
           loading.present();
-        },100);
        const result = await this.checkCorrectUrl(this.rootedIPRange[rootedIPIndex]);
        console.log("trying rootedIP",result);
        if(result){
@@ -116,6 +109,11 @@ export class RoomSwitchContainerPage {
     {
       this.inItSocketConnection();
     }
+    // this.websocketProvider.getData().subscribe((data: any) => {
+    //   console.log("data passed to function", data);
+    //   this.roomDetailsProvider.setNewDeviceData(data);
+    //   this.initDeviceListConfiguration();
+    // });
   }
 
   // async getData(){
@@ -150,11 +148,11 @@ export class RoomSwitchContainerPage {
   inItSocketConnection() {
     try {
       this.websocketProvider.connectToSocket(this.rootedIP);
-      // this.websocketProvider.getData().subscribe((data: any) => {
-      //   console.log("data passed to function", data);
-      //   this.roomDetailsProvider.setNewDeviceData(data);
-      //   this.initDeviceListConfiguration();
-      // });
+      this.websocketProvider.getData().subscribe((data: any) => {
+        console.log("data passed to function", data);
+        this.roomDetailsProvider.setNewDeviceData(data);
+        this.initDeviceListConfiguration();
+      });
 
     } catch (error) {
       this.rootedIP = "";
