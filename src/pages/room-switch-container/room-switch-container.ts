@@ -62,7 +62,7 @@ export class RoomSwitchContainerPage {
   ) {
       this.initDeviceListConfiguration();
       this.getRootedIPData();
-      this._mqttService.observe('onpower/client3/to').subscribe((message: IMqttMessage) => 
+      this._mqttService.observe('onpower/client3/from').subscribe((message: IMqttMessage) => 
       {
         console.log(message.payload.toString());
       });
