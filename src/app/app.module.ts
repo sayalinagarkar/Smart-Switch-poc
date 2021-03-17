@@ -27,7 +27,7 @@ import {
 
 export const MQTT_SERVICE_OPTIONS = {
   hostname: '3.95.5.223',
-  port: 1883,
+  port: 9001,
   username:'onpowermqtt',
   password:'onpowermqttserver',
 };
