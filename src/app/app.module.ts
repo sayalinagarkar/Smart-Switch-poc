@@ -18,7 +18,23 @@ import { AddRoomPage } from '../pages/add-room/add-room';
 import { RoomSwitchContainerPage } from '../pages/room-switch-container/room-switch-container';
 import { RoomDetailsProvider } from '../providers/room-details/room-details';
 import { AddDeviceDatailsPage } from '../pages/add-device-datails/add-device-datails';
+import { Observable } from 'rxjs/Observable';
+import {
+  IMqttMessage,
+  MqttModule,
+  MqttService
+} from 'ngx-mqtt';
 
+export const MQTT_SERVICE_OPTIONS = {
+  hostname: '3.95.5.223',
+  port: 1883,
+  username:'onpowermqtt',
+  password:'onpowermqttserver',
+};
+
+export function mqttServiceFactory() {
+  return new MqttService(MQTT_SERVICE_OPTIONS);
+}
 @NgModule({
   declarations: [
     MyApp,
@@ -32,12 +48,14 @@ import { AddDeviceDatailsPage } from '../pages/add-device-datails/add-device-dat
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp,{statusbarPadding: true}),
     ComponentsModule,
     HttpClientModule,
     IonicStorageModule.forRoot(),
-
-
+    MqttModule.forRoot({
+      provide: MqttService,
+      useFactory: mqttServiceFactory
+    }),
+    IonicModule.forRoot(MyApp,{statusbarPadding: true})
   ],
   bootstrap: [IonicApp],
   entryComponents: [

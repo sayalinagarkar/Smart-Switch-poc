@@ -18,6 +18,8 @@ import { AddRoomPage } from "../add-room/add-room";
 import { RootedIpInputModelPage } from "../rooted-ip-input-model/rooted-ip-input-model";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {  LoadingController } from 'ionic-angular';
+import { IMqttMessage, MqttModule, MqttService } from 'ngx-mqtt';
+import { Observable } from 'rxjs/Observable';
 /**
  * Generated class for the RoomSwitchContainerPage page.
  *
@@ -55,10 +57,15 @@ export class RoomSwitchContainerPage {
     public toastController: ToastController,
     public alertCtrl: AlertController,
     private deviceListFormatterProvider: DeviceListFormatterProvider,
-    public httpClient: HttpClient
+    public httpClient: HttpClient,
+    private _mqttService: MqttService
   ) {
       this.initDeviceListConfiguration();
       this.getRootedIPData();
+      this._mqttService.observe('onpower/client3/door').subscribe((message: IMqttMessage) => 
+      {
+        console.log(message.payload.toString());
+      });
   }
 
   async getRootedIPData(){
