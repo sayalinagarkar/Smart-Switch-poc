@@ -54,7 +54,7 @@ export class SwitchBoxComponent implements OnInit {
     console.log(this.switchBoardList,"switchBoard");
 
 
-
+    
   }
   ngOnInit() {
     console.log(this.rootedIP);

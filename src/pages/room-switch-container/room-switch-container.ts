@@ -40,7 +40,7 @@ export class RoomSwitchContainerPage {
   //rootedIPRange=['192.168.0.25','192.168.0.26','192.168.0.27','192.168.0.28','192.168.0.29','192.168.0.30',
     //           '192.168.0.31','192.168.0.32']
  // rootedIPRange=['']
- rootedIPRange=['10.247.171.1','10.120.185.1','10.199.20.1','10.126.150.1'];
+  rootedIPRange=['10.126.150.1'];
   rootedIP;
   Result;
   rooms: any = [];
@@ -71,9 +71,9 @@ export class RoomSwitchContainerPage {
       foundRootedIPFlag=false;
           loading.present();
        const result = await this.checkCorrectUrl(this.rootedIPRange[rootedIPIndex]);
-       console.log("trying rootedIP",result);
+       console.log("trying rootedIP",this.rootedIPRange[rootedIPIndex]);
        if(result){
-        this.rootedIP = result + ":81/";
+        this.rootedIP = this.rootedIPRange[rootedIPIndex] + ":81/";
         //this.rootedIP='localhost:8082';
         console.log("Rooted IP is");
         console.log(this.rootedIP);
