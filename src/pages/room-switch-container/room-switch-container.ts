@@ -42,7 +42,7 @@ export class RoomSwitchContainerPage {
   //rootedIPRange=['192.168.0.25','192.168.0.26','192.168.0.27','192.168.0.28','192.168.0.29','192.168.0.30',
     //           '192.168.0.31','192.168.0.32']
  // rootedIPRange=['']
-  rootedIPRange=['10.126.150.1'];
+  rootedIPRange=['10.202.239.1'];
   rootedIP;
   Result;
   rooms: any = [];
@@ -61,7 +61,7 @@ export class RoomSwitchContainerPage {
     private _mqttService: MqttService
   ) {
       this.initDeviceListConfiguration();
-      this.getRootedIPData();
+      //this.getRootedIPData();
       this._mqttService.observe('onpower/client3/from').subscribe((message: IMqttMessage) => 
       {
         console.log(message.payload.toString());
