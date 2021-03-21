@@ -174,7 +174,7 @@ this.ws.addEventListener('close', (event) => {
   //This method is used for receiving data from Mqtt server
   getMqttData() {
     let observable = new Observable(observer => {
-      this._mqttService.observe('onpower/client2/from').subscribe((message: IMqttMessage) => 
+      this._mqttService.observe('onpower/client1/from').subscribe((message: IMqttMessage) => 
       {
         console.log(message.payload.toString());
         observer.next(message.payload.toString());
@@ -197,7 +197,7 @@ sendData(deviceInfo:any){
   }
   else
   {
-    this._mqttService.unsafePublish("onpower/client2/to", JSON.stringify(deviceInfo), {qos: 0, retain: false});
+    this._mqttService.unsafePublish("onpower/client1/to", JSON.stringify(deviceInfo), {qos: 0, retain: false});
   }
 }
 closeWebserver(){
