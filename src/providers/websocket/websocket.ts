@@ -3,6 +3,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { AlertController, LoadingController } from 'ionic-angular';
 import { Observable } from 'rxjs';
 import { DeviceListFormatterProvider } from '../device-list-formatter/device-list-formatter';
+import { IMqttMessage, MqttModule, MqttService } from 'ngx-mqtt';
 /*
   Generated class for the WebsocketProvider provider.
 
@@ -21,7 +22,7 @@ export class WebsocketProvider  {
   loading:any;
   isSocketConnected:boolean=false;
   constructor(private deviceListFormatterProvider: DeviceListFormatterProvider,
-    public alertCtrl: AlertController,public loadingCtrl: LoadingController,public httpClient: HttpClient
+    public alertCtrl: AlertController,public loadingCtrl: LoadingController,public httpClient: HttpClient, private _mqttService: MqttService
     ) {
 
 }
@@ -159,22 +160,45 @@ this.ws.addEventListener('close', (event) => {
   getData() {
     let observable = new Observable(observer => {
       this.ws.addEventListener('message', (data) => {
-        console.log("getDAta");
+        console.log("getData");
         console.log("data from server",data);
         observer.next(data.data);
       });
+
     })
     return observable;
 
 
   }
 
+  //This method is used for receiving data from Mqtt server
+  getMqttData() {
+    let observable = new Observable(observer => {
+      this._mqttService.observe('onpower/client2/from').subscribe((message: IMqttMessage) => 
+      {
+        console.log(message.payload.toString());
+        observer.next(message.payload.toString());
+      });
+
+    })
+    return observable;
+
+
+  }
+  
 
 //This method is used for sending data to socket
 sendData(deviceInfo:any){
   //JSON.stringify(obj);
   console.log(JSON.stringify(deviceInfo));
-  this.ws.send(JSON.stringify(deviceInfo)); //need yto uncomment
+  if(this.ws)
+  {
+    this.ws.send(JSON.stringify(deviceInfo)); //need yto uncomment
+  }
+  else
+  {
+    this._mqttService.unsafePublish("onpower/client2/to", JSON.stringify(deviceInfo), {qos: 0, retain: false});
+  }
 }
 closeWebserver(){
   this.ws.addEventListener("close",()=>{
