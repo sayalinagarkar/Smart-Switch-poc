@@ -9,7 +9,7 @@ import { Subject } from "rxjs";
 */
 @Injectable()
 export class RoomDetailsProvider {
-  rooms = ['Living Room'];
+  rooms = ['Living Room',' Master BedRoom'];
   deviceArray = [];
   fanSpeed='';
   fanSpeedChange: Subject<number> = new Subject<number>();
@@ -22,7 +22,7 @@ export class RoomDetailsProvider {
         //switchboard1 start
         {
           name: "Bulb",
-          index: 1,
+          index: 0,
           nodeValue: 1,
           iconUrl: "../../assets/imgs/bulb.png",
           iconUrlSwitchOn: "../../assets/imgs/bulb-on.png",
@@ -32,7 +32,7 @@ export class RoomDetailsProvider {
         },
         {
           name: "Bulb",
-          index: 2,
+          index: 1,
           nodeValue: 1,
           iconUrl: "../../assets/imgs/bulb.png",
           iconUrlSwitchOn: "../../assets/imgs/bulb-on.png",
@@ -40,10 +40,9 @@ export class RoomDetailsProvider {
           deviceID: "Relay3",
           Speed: 0,
         },
-        //switchboard2 start
-          {
+        {
           name: "Fan",
-          index: 3,
+          index: 2,
           nodeValue: 1,
           iconUrl: "../../assets/imgs/fan.png",
           iconUrlSwitchOn: "../../assets/imgs/fan-on.png",
@@ -53,12 +52,49 @@ export class RoomDetailsProvider {
         },
       ],
     ], //room 1 end
- ]; //total end
+    [
+    //room  start
+      [
+        //switchboard1 start
+        {
+          name: "Bulb",
+          index: 3,
+          nodeValue: 2,
+          iconUrl: "../../assets/imgs/bulb.png",
+          iconUrlSwitchOn: "../../assets/imgs/bulb-on.png",
+          toggleValue: false,
+          deviceID: "Relay1",
+          Speed: 0,
+        },
+        {
+          name: "Bulb",
+          index: 4,
+          nodeValue: 2,
+          iconUrl: "../../assets/imgs/bulb.png",
+          iconUrlSwitchOn: "../../assets/imgs/bulb-on.png",
+          toggleValue: false,
+          deviceID: "Relay2",
+          Speed: 0,
+        },
+        {
+          name: "Fan",
+          index: 5,
+          nodeValue: 2,
+          iconUrl: "../../assets/imgs/fan.png",
+          iconUrlSwitchOn: "../../assets/imgs/fan-on.png",
+          toggleValue: false,
+          deviceID: "Relay3",
+          Speed: 0,
+        },
+      ],
+    ],
+  ]; //total end
 
   //createRoomData=[];
   deviceDetails = [{ name: "", type: "" }];
   switchBoardList = [
     { name: "SwitchBoard1", roomNumber: 1, node: 1 },
+    { name: "SwitchBoard1", roomNumber: 2, node: 2 },
   ];
   switchBoardIndex = 0;
   deviceIndex = 0;
