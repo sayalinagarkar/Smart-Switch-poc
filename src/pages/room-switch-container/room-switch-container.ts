@@ -113,12 +113,12 @@ export class RoomSwitchContainerPage {
     if (this.rootedIP)
     {
       this.inItSocketConnection();
+      this.websocketProvider.getData().subscribe((data: any) => {
+        console.log("data passed to function", data);
+        this.roomDetailsProvider.setNewDeviceData(data);
+        this.initDeviceListConfiguration();
+      });
     }
-    // this.websocketProvider.getData().subscribe((data: any) => {
-    //   console.log("data passed to function", data);
-    //   this.roomDetailsProvider.setNewDeviceData(data);
-    //   this.initDeviceListConfiguration();
-    // });
   }
 
   // async getData(){
