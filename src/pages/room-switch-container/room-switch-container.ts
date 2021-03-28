@@ -40,7 +40,7 @@ export class RoomSwitchContainerPage {
   //rootedIPRange=['192.168.0.25','192.168.0.26','192.168.0.27','192.168.0.28','192.168.0.29','192.168.0.30',
     //           '192.168.0.31','192.168.0.32']
  // rootedIPRange=['']
-  rootedIPRange=['10.202.239.1'];
+  rootedIPRange=['10.203.45.1','192.168.29.5'];
   rootedIP;
   Result;
   rooms: any = [];
@@ -58,7 +58,7 @@ export class RoomSwitchContainerPage {
     public httpClient: HttpClient
   ) {
       this.initDeviceListConfiguration();
-      //this.getRootedIPData();
+      this.getRootedIPData();
       this.websocketProvider.getMqttData().subscribe((data: any) => {
         console.log("Mqtt data passed to function", data);
         this.roomDetailsProvider.setNewDeviceData(data);
