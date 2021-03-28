@@ -40,7 +40,7 @@ export class RoomSwitchContainerPage {
   //rootedIPRange=['192.168.0.25','192.168.0.26','192.168.0.27','192.168.0.28','192.168.0.29','192.168.0.30',
     //           '192.168.0.31','192.168.0.32']
  // rootedIPRange=['']
-  rootedIPRange=['10.202.239.1'];
+  rootedIPRange=['10.202.239.1','10.201.228.1'];
   rootedIP;
   Result;
   rooms: any = [];
@@ -113,12 +113,12 @@ export class RoomSwitchContainerPage {
     if (this.rootedIP)
     {
       this.inItSocketConnection();
+      this.websocketProvider.getData().subscribe((data: any) => {
+        console.log("data passed to function", data);
+        this.roomDetailsProvider.setNewDeviceData(data);
+        this.initDeviceListConfiguration();
+      });
     }
-    // this.websocketProvider.getData().subscribe((data: any) => {
-    //   console.log("data passed to function", data);
-    //   this.roomDetailsProvider.setNewDeviceData(data);
-    //   this.initDeviceListConfiguration();
-    // });
   }
 
   // async getData(){

@@ -9,7 +9,7 @@ import { Subject } from "rxjs";
 */
 @Injectable()
 export class RoomDetailsProvider {
-  rooms = ['Living Room',' Master BedRoom'];
+  rooms = ['Living Room','Kitchen'];
   deviceArray = [];
   fanSpeed='';
   fanSpeedChange: Subject<number> = new Subject<number>();
