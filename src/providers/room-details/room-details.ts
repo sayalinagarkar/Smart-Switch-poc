@@ -23,7 +23,7 @@ export class RoomDetailsProvider {
         {
           name: "Bulb",
           index: 0,
-          nodeValue: 1,
+          nodeValue: 2,
           iconUrl: "../../assets/imgs/bulb.png",
           iconUrlSwitchOn: "../../assets/imgs/bulb-on.png",
           toggleValue: false,
@@ -33,7 +33,7 @@ export class RoomDetailsProvider {
         {
           name: "Bulb",
           index: 1,
-          nodeValue: 1,
+          nodeValue: 2,
           iconUrl: "../../assets/imgs/bulb.png",
           iconUrlSwitchOn: "../../assets/imgs/bulb-on.png",
           toggleValue: false,
@@ -43,7 +43,7 @@ export class RoomDetailsProvider {
         {
           name: "Fan",
           index: 2,
-          nodeValue: 1,
+          nodeValue: 2,
           iconUrl: "../../assets/imgs/fan.png",
           iconUrlSwitchOn: "../../assets/imgs/fan-on.png",
           toggleValue: false,
@@ -59,7 +59,7 @@ export class RoomDetailsProvider {
         {
           name: "Bulb",
           index: 3,
-          nodeValue: 2,
+          nodeValue: 1,
           iconUrl: "../../assets/imgs/bulb.png",
           iconUrlSwitchOn: "../../assets/imgs/bulb-on.png",
           toggleValue: false,
@@ -69,7 +69,7 @@ export class RoomDetailsProvider {
         {
           name: "Bulb",
           index: 4,
-          nodeValue: 2,
+          nodeValue: 1,
           iconUrl: "../../assets/imgs/bulb.png",
           iconUrlSwitchOn: "../../assets/imgs/bulb-on.png",
           toggleValue: false,
@@ -79,7 +79,7 @@ export class RoomDetailsProvider {
         {
           name: "Fan",
           index: 5,
-          nodeValue: 2,
+          nodeValue: 1,
           iconUrl: "../../assets/imgs/fan.png",
           iconUrlSwitchOn: "../../assets/imgs/fan-on.png",
           toggleValue: false,
@@ -93,8 +93,8 @@ export class RoomDetailsProvider {
   //createRoomData=[];
   deviceDetails = [{ name: "", type: "" }];
   switchBoardList = [
-    { name: "SwitchBoard1", roomNumber: 1, node: 1 },
-    { name: "SwitchBoard1", roomNumber: 2, node: 2 },
+    { name: "SwitchBoard1", roomNumber: 1, node: 2 },
+    { name: "SwitchBoard1", roomNumber: 2, node: 1 },
   ];
   switchBoardIndex = 0;
   deviceIndex = 0;
