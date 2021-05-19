@@ -26,7 +26,7 @@ import {
 } from 'ngx-mqtt';
 
 export const MQTT_SERVICE_OPTIONS = {
-  hostname: '3.95.5.223',
+  hostname: 'mqtt.transergllp.com',
   port: 9001,
   username:'onpowermqtt',
   password:'onpowermqttserver',
