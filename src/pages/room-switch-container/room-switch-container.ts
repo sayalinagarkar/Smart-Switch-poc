@@ -40,7 +40,7 @@ export class RoomSwitchContainerPage {
   //rootedIPRange=['192.168.0.25','192.168.0.26','192.168.0.27','192.168.0.28','192.168.0.29','192.168.0.30',
     //           '192.168.0.31','192.168.0.32']
  // rootedIPRange=['']
-  rootedIPRange=['10.202.239.1','10.201.228.1'];
+  rootedIPRange=['10.211.134.1','10.202.229.1'];
   rootedIP;
   Result;
   rooms: any = [];
